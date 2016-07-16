@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.stefanocke.japkit.examples</groupId>
+		<artifactId>japkit-examples</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>japkit-examples-freebuilder-test</artifactId>
+	<name>Japkit Examples - Free Builder Test</name>
+	<description>Tests for japkit-examples-freebuilder.</description>
+	<dependencies>
+		<dependency>
+			<groupId>com.github.stefanocke.japkit.examples</groupId>
+			<artifactId>japkit-examples-freebuilder</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+
+					
+					<compilerArgs>
+						<compilerArg>
+							-Aannotations=de.japkit.examples.freebuilder.*
+						</compilerArg>
+						
+					</compilerArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
