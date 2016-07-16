@@ -3,8 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.github.stefanocke.japkit.examples</groupId>
-		<artifactId>japkit-examples</artifactId>
+		<artifactId>japkit-examples-test-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../japkit-examples-test-parent</relativePath>
 	</parent>
 	<artifactId>japkit-examples-freebuilder-test</artifactId>
 	<name>Japkit Examples - Free Builder Test</name>
@@ -17,6 +18,10 @@
 		</dependency>
 	</dependencies>
 
+	<properties>
+		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -24,12 +29,12 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 
-					
+
 					<compilerArgs>
 						<compilerArg>
 							-Aannotations=de.japkit.examples.freebuilder.*
 						</compilerArg>
-						
+
 					</compilerArgs>
 				</configuration>
 			</plugin>

@@ -51,8 +51,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<japkit.version>1.0.1</japkit.version>
-		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
+		<japkit.version>1.0.3</japkit.version>
 	</properties>
 	<build>
 		<plugins>
@@ -62,24 +61,6 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>com.github.stefanocke.japkit</groupId>
-							<artifactId>japkit-annotation-processor</artifactId>
-							<version>${japkit.version}</version>
-						</path>
-						<path>
-							<groupId>com.github.stefanocke.japkit</groupId>
-							<artifactId>japkit-juel</artifactId>
-							<version>${japkit.version}</version>
-						</path>
-						<path>
-							<groupId>com.github.stefanocke.japkit</groupId>
-							<artifactId>japkit-groovy</artifactId>
-							<version>${japkit.version}</version>
-						</path>
-					</annotationProcessorPaths>
-					<generatedSourcesDirectory>${project.build.directory}/src/main/generated-sources</generatedSourcesDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -141,6 +122,7 @@
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<profiles>
@@ -176,6 +158,7 @@
 	<modules>
 		<module>japkit-examples-freebuilder</module>
 		<module>japkit-examples-freebuilder-test</module>
+		<module>japkit-examples-test-parent</module>
 	</modules>
 </project>
 
