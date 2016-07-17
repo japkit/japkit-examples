@@ -61,6 +61,15 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>com.github.stefanocke.japkit</groupId>
+							<artifactId>japkit-all</artifactId>
+							<version>${japkit.version}</version>
+						</path>
+					</annotationProcessorPaths>
+					<generatedSourcesDirectory>${project.build.directory}/src/main/generated-sources</generatedSourcesDirectory>
+					<generatedTestSourcesDirectory>${project.build.directory}/src/main/generated-test-sources</generatedTestSourcesDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -157,8 +166,6 @@
 
 	<modules>
 		<module>japkit-examples-freebuilder</module>
-		<module>japkit-examples-freebuilder-test</module>
-		<module>japkit-examples-test-parent</module>
 	</modules>
 </project>
 

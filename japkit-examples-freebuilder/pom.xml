@@ -9,4 +9,20 @@
 	<artifactId>japkit-examples-freebuilder</artifactId>
 	<name>Japkit Examples - Free Builder</name>
 	<description>Example that generates a builder similar to https://github.com/google/FreeBuilder </description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerArgs>
+						<compilerArg>
+							-Aannotations=de.japkit.examples.freebuilder.*
+						</compilerArg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
