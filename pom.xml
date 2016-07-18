@@ -51,7 +51,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<japkit.version>1.0.3</japkit.version>
+		<japkit.version>1.0.4-SNAPSHOT</japkit.version>
 	</properties>
 	<build>
 		<plugins>
@@ -162,6 +162,39 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>jdt</id>
+			<activation>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.5.1</version>
+						<configuration>
+							<compilerId>jdt</compilerId>
+							<source>1.8</source>
+							<target>1.8</target>
+							<generatedSourcesDirectory>${project.build.directory}/src/main/generated-sources</generatedSourcesDirectory>
+							<generatedTestSourcesDirectory>${project.build.directory}/src/main/generated-test-sources</generatedTestSourcesDirectory>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>com.github.stefanocke.japkit</groupId>
+								<artifactId>japkit-all</artifactId>
+								<version>${japkit.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-compiler-jdt</artifactId>
+								<version>0.25.0</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 	</profiles>
 
 	<modules>
