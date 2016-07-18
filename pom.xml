@@ -48,6 +48,18 @@
 		<url>https://travis-ci.org/stefanocke/japkit-examples</url>
 	</ciManagement>
 
+	<repositories>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -187,12 +199,20 @@
 							<dependency>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>tycho-compiler-jdt</artifactId>
-								<version>0.25.0</version>
+								<version>0.26.0-SNAPSHOT</version>
 							</dependency>
 						</dependencies>
 					</plugin>
 				</plugins>
 			</build>
+
+			<pluginRepositories>
+				<pluginRepository>
+					<id>tycho-snapshots</id>
+					<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>
+				</pluginRepository>
+			</pluginRepositories>
+
 		</profile>
 
 	</profiles>
