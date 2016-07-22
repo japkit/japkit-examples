@@ -147,79 +147,80 @@
 	</dependencies>
 
 	<profiles>
-		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>gpg</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.5</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<!-- Build with Eclipse JDT Compiler. -->
-		<profile>
-			<id>jdt</id>
-			<activation>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.5.1</version>
-						<configuration>
-							<compilerId>jdt</compilerId>
-							<source>1.8</source>
-							<target>1.8</target>
-							<generatedSourcesDirectory>${project.build.directory}/src/main/generated-sources</generatedSourcesDirectory>
-							<generatedTestSourcesDirectory>${project.build.directory}/src/main/generated-test-sources</generatedTestSourcesDirectory>
-						</configuration>
-						<dependencies>
-							<dependency>
-								<groupId>com.github.stefanocke.japkit</groupId>
-								<artifactId>japkit-all</artifactId>
-								<version>${japkit.version}</version>
-							</dependency>
-							<dependency>
-								<groupId>org.eclipse.tycho</groupId>
-								<artifactId>tycho-compiler-jdt</artifactId>
-								<version>0.26.0-SNAPSHOT</version>
-							</dependency>
-						</dependencies>
-					</plugin>
-				</plugins>
-			</build>
+	<profile>
+		<id>release-sign-artifacts</id>
+		<activation>
+			<property>
+				<name>gpg</name>
+				<value>true</value>
+			</property>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.5</version>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+	<!-- Build with Eclipse JDT Compiler. -->
+	<profile>
+		<id>jdt</id>
+		<activation>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<compilerId>jdt</compilerId>
+						<source>1.8</source>
+						<target>1.8</target>
+						<generatedSourcesDirectory>${project.build.directory}/src/main/generated-sources</generatedSourcesDirectory>
+						<generatedTestSourcesDirectory>${project.build.directory}/src/main/generated-test-sources</generatedTestSourcesDirectory>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.github.stefanocke.japkit</groupId>
+							<artifactId>japkit-all</artifactId>
+							<version>${japkit.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-compiler-jdt</artifactId>
+							<version>0.26.0-SNAPSHOT</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</build>
 
-			<pluginRepositories>
-				<pluginRepository>
-					<id>tycho-snapshots</id>
-					<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>
-				</pluginRepository>
-			</pluginRepositories>
+		<pluginRepositories>
+			<pluginRepository>
+				<id>tycho-snapshots</id>
+				<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>
+			</pluginRepository>
+		</pluginRepositories>
 
-		</profile>
+	</profile>
 
-	</profiles>
+</profiles>
 
 	<modules>
 		<module>japkit-examples-freebuilder</module>
+		<module>japkit-examples-roo-petclinic</module>
 	</modules>
 </project>
 
