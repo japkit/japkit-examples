@@ -32,12 +32,9 @@ public class FreeBuilderTemplate {
 				srcVar = "p",
 				getter = @Getter())
 		private final SrcType $srcElementName$ = null;
-		
-		@CodeFragment(code = "#{src}")
-		static class rhs{}
 				
 		@CodeFragment(vars = @Var(name="param", expr ="builder.#{src.simpleName}"),
-				code = "this.#{src.simpleName} = #{rhs(param)};")
+				code = "this.#{src.simpleName} = #{param};")
 		static class assignment{}
 		
 		@Constructor(bodyIterator = "#{src.properties}", bodyCode = "#{assignment()}")
