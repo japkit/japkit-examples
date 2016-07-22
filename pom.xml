@@ -212,6 +212,16 @@
 				<id>tycho-snapshots</id>
 				<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>
 			</pluginRepository>
+			<pluginRepository>
+				<id>ossrh</id>
+				<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+				<releases>
+					<enabled>false</enabled>
+				</releases>
+				<snapshots>
+					<enabled>true</enabled>
+				</snapshots>
+			</pluginRepository>
 		</pluginRepositories>
 
 	</profile>
