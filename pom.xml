@@ -63,7 +63,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<japkit.version>1.0.4-SNAPSHOT</japkit.version>
+		<japkit.version>1.0.5-SNAPSHOT</japkit.version>
 	</properties>
 	<build>
 		<plugins>
