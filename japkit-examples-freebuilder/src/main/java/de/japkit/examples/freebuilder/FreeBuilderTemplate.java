@@ -25,49 +25,48 @@ public class FreeBuilderTemplate {
 	class Builder {
 	};
 
-	@Field(src = "#{src.properties}",
+	@Field(src = "#{properties}",
 			srcVar = "p",
 			getter = @Getter(commentExpr = "the value that will be returned by {@link #{interfaze.simpleName}##{p.getter.simpleName}()}."),
-			setter = @Setter(chain=true, commentExpr = "the value to be returned by {@link #{interfaze.simpleName}##{p.getter.simpleName}()}."))
+			setter = @Setter(chain = true,
+					commentExpr = "the value to be returned by {@link #{interfaze.simpleName}##{p.getter.simpleName}()}."))
 	private SrcType $srcElementName$;
 
 	@InnerClass
 	static final class Value implements Interfaze {
-		@Field(src = "#{src.properties}",
+		@Field(src = "#{properties}",
 				srcVar = "p",
 				getter = @Getter())
 		private final SrcType $srcElementName$ = null;
 
-		@CodeFragment(code = "this.#{src.name} = builder.#{src.name};")
+		@CodeFragment(code = "this.#{name} = builder.#{name};")
 		static class assignment {
 		}
 
-		@Constructor(bodyIterator = "#{src.properties}",
+		@Constructor(bodyIterator = "#{properties}",
 				bodyCode = "#{assignment()}")
 		private Value(Builder builder) {
 
 		}
 
-		@CodeFragment(imports = Objects.class,
-				iterator = "#{src.properties}",
-				code = "Objects.equals(#{src.name}, other.#{src.name})",
-				separator = " && ",
-				indentAfterLinebreak = true)
-		class allPropertiesAreEqual {
-		}
-
 		/**
-		 * @japkit.bodyCode
+		 * @japkit.bodyBeforeIteratorCode
 		 * 
 		 * <pre>
 		 * if (!(obj instanceof Value)) {
 		 * 	return false;
 		 * }
 		 * Value other = (Value) obj;
-		 * return #{allPropertiesAreEqual.code()};
+		 * return
 		 * </pre>
+		 * 
+		 * @japkit.bodyCode Objects.equals(#{name}, other.#{name})
+		 * @japkit.bodyAfterIteratorCode ;
 		 */
-		@Method()
+		@Method(imports = Objects.class,
+				bodyIterator = "#{properties}",
+				bodySeparator = " && ",
+				bodyIndentAfterLinebreak = true)
 		@Override
 		public boolean equals(Object obj) {
 			return true;
@@ -75,8 +74,8 @@ public class FreeBuilderTemplate {
 
 		@Method(imports = Objects.class,
 				bodyBeforeIteratorCode = "return Objects.hash(",
-				bodyIterator = "#{src.properties}",
-				bodyCode = "#{src.name}",
+				bodyIterator = "#{properties}",
+				bodyCode = "#{name}",
 				bodySeparator = ", ",
 				bodyLinebreak = false,
 				bodyAfterIteratorCode = ");")
@@ -84,13 +83,15 @@ public class FreeBuilderTemplate {
 		public int hashCode() {
 			return 0;
 		}
-		
-		@Method(bodyBeforeIteratorCode = "return \"#{interfaze.simpleName} {",
-				bodyIterator = "#{src.properties}",
-				bodyCode = "#{src.name}=\" + #{src.name} + \"",
-				bodySeparator = ", ",
-				bodyLinebreak = false,
-				bodyAfterIteratorCode = "}\";")
+
+		/**
+		 * @japkit.bodyBeforeIteratorCode return "#{interfaze.simpleName} {"+
+		 * @japkit.bodyCode "#{name}=" + #{name} +
+		 * @japkit.bodySeparator ", " +
+		 * @japkit.bodyAfterIteratorCode "}";
+		 */
+		@Method(bodyIterator = "#{properties}",
+				bodyIndentAfterLinebreak = true)
 		@Override
 		public String toString() {
 			return "";
