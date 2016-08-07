@@ -2,8 +2,6 @@ package de.japkit.examples.freebuilder;
 
 import java.util.Objects;
 
-import javax.lang.model.element.Modifier;
-
 import de.japkit.annotations.RuntimeMetadata;
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.CodeFragment;
@@ -13,7 +11,6 @@ import de.japkit.metaannotations.Getter;
 import de.japkit.metaannotations.InnerClass;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Setter;
-import de.japkit.metaannotations.TemplateCall;
 import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.GeneratedClass;
 import de.japkit.metaannotations.classselectors.SrcType;
