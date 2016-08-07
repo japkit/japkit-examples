@@ -10,10 +10,8 @@ import de.japkit.metaannotations.TemplateCall;
 import de.japkit.metaannotations.Trigger;
 
 
-@Trigger
+@Trigger(template=FreeBuilderTemplate.class)
 @Target(ElementType.TYPE)
-@Clazz(nameSuffixToRemove = "", nameSuffixToAppend = "Builder", modifiers = { Modifier.PUBLIC}, 
-	templates = @TemplateCall(FreeBuilderTemplate.class) )
 public @interface FreeBuilder {
 	boolean shadow() default false;
 }
