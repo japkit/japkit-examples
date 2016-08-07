@@ -64,6 +64,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<japkit.version>1.0.5-SNAPSHOT</japkit.version>
+		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
 	</properties>
 	<build>
 		<plugins>
