@@ -17,6 +17,7 @@ import de.japkit.metaannotations.classselectors.SrcType;
 
 @RuntimeMetadata
 @Clazz(nameSuffixToAppend = "Builder")
+@SuppressWarnings("$interfaze.simpleName$")
 public class FreeBuilderTemplate {
 
 	@Var(fun = SrcType.class)
@@ -32,14 +33,14 @@ public class FreeBuilderTemplate {
 			getter = @Getter(commentExpr = "the value that will be returned by {@link #{interfaze.simpleName}##{p.getter.simpleName}()}."),
 			setter = @Setter(chain = true,
 					commentExpr = "the value to be returned by {@link #{interfaze.simpleName}##{p.getter.simpleName}()}."))
-	private SrcType $srcElementName$;
+	private SrcType $name$;
 
 	@InnerClass
 	static final class Value implements Interfaze {
 		@Field(src = "#{properties}",
 				srcVar = "p",
 				getter = @Getter())
-		private final SrcType $srcElementName$ = null;
+		private final SrcType $name$ = null;
 
 		@CodeFragment(code = "this.#{name} = builder.#{name};")
 		static class assignment {

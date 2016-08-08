@@ -192,7 +192,7 @@ public abstract class ControllerMembers {
 	 * @japkit.bodyCode <code>return "#{dateTimeFormatStyle()}";</code>
 	 */
 	@Method(src = "datetimeProperties")
-	abstract String getDateTimeFormat$nameFirstUpper$();
+	abstract String getDateTimeFormat$name$();
 
 	//TODO: Eigentlich singleValueType.
 	/**
