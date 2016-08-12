@@ -1,14 +1,22 @@
 package de.japkit.examples.freebuilder;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import de.japkit.annotations.RuntimeMetadata;
+import de.japkit.metaannotations.Case;
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
 import de.japkit.metaannotations.Field;
 import de.japkit.metaannotations.Getter;
 import de.japkit.metaannotations.InnerClass;
+import de.japkit.metaannotations.Matcher;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Setter;
 import de.japkit.metaannotations.Var;
@@ -17,7 +25,6 @@ import de.japkit.metaannotations.classselectors.SrcType;
 
 @RuntimeMetadata
 @Clazz(nameSuffixToAppend = "Builder")
-@SuppressWarnings("$interfaze.simpleName$")
 public class FreeBuilderTemplate {
 
 	@Var(fun = SrcType.class)
@@ -42,7 +49,26 @@ public class FreeBuilderTemplate {
 				getter = @Getter())
 		private final SrcType $name$ = null;
 
-		@CodeFragment(code = "this.#{name} = builder.#{name};")
+		@Matcher(type = Date.class)
+		public class isDate{}
+		
+		@Matcher(type = List.class)
+		public class isList{}
+		
+		@Matcher(type = Set.class)
+		public class isSet{}
+		
+		@CodeFragment(imports = {Date.class, ArrayList.class, HashSet.class, Collections.class},
+				cases = { @Case(condFun=isDate.class, value = "new Date(#{surrounded}.getTime())"),
+						@Case(condFun=isList.class, value = "Collections.unmodifiableList(new ArrayList<>(#{surrounded}))"),
+						@Case(condFun=isSet.class, value = "Collections.unmodifiableSet(new HashSet<>(#{surrounded}))") })
+		static class defensiveCopyFragment {
+		}
+		
+		@CodeFragment(code = "builder.#{name}", surroundingFragments = "defensiveCopyFragment")
+		static class rhs{}
+		
+		@CodeFragment(code = "this.#{name} = #{rhs()};")
 		static class assignment {
 		}
 
