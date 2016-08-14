@@ -14,6 +14,7 @@ import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
 import de.japkit.metaannotations.Field;
+import de.japkit.metaannotations.Function;
 import de.japkit.metaannotations.Getter;
 import de.japkit.metaannotations.InnerClass;
 import de.japkit.metaannotations.Matcher;
@@ -62,15 +63,15 @@ public class FreeBuilderTemplate {
 		
 		@Switch
 		static class defensiveCopyFragment {
-			@Case(condFun=isDate.class)
+			@isDate
 			@CodeFragment(imports = Date.class, code = "new Date(#{surrounded}.getTime())")
 			String copyDate;
 			
-			@Case(condFun=isList.class)
+			@isList
 			@CodeFragment(imports = {ArrayList.class, Collections.class}, code = "Collections.unmodifiableList(new ArrayList<>(#{surrounded}))")
 			String copyList;
 			
-			@Case(condFun=isSet.class)
+			@isSet
 			@CodeFragment(imports = {HashSet.class, Collections.class}, code = "Collections.unmodifiableSet(new HashSet<>(#{surrounded}))")
 			String copySet;
 		}
