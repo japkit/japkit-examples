@@ -9,12 +9,10 @@ import java.util.Objects;
 import java.util.Set;
 
 import de.japkit.annotations.RuntimeMetadata;
-import de.japkit.metaannotations.Case;
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
 import de.japkit.metaannotations.Field;
-import de.japkit.metaannotations.Function;
 import de.japkit.metaannotations.Getter;
 import de.japkit.metaannotations.InnerClass;
 import de.japkit.metaannotations.Matcher;
