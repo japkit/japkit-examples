@@ -16,7 +16,7 @@
 	</parent>
 	<properties>
 		<java.version>1.8</java.version>
-		<japkit.version>1.0.5-SNAPSHOT</japkit.version>
+		<japkit.version>1.1.0-SNAPSHOT</japkit.version>
 		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
 	</properties>
 
