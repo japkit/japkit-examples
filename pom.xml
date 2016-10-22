@@ -137,6 +137,11 @@
 			<artifactId>japkit-annotations</artifactId>
 			<version>${japkit.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.stefanocke.japkit</groupId>
+			<artifactId>japkit-annotationtemplates</artifactId>
+			<version>${japkit.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

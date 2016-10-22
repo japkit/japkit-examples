@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
-import de.japkit.roo.japkit.meta.AnnotationTemplates;
+import de.japkit.annotationtemplates.AnnotationTemplates;
 
 @AnnotationTemplates(targetAnnotations = {Column.class, Entity.class, Embeddable.class, Embedded.class, AttributeOverride.class, AttributeOverrides.class})
 public class JpaAnnotationTemplates {
