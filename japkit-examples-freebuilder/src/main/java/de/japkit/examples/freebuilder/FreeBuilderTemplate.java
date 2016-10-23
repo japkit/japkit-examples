@@ -50,34 +50,42 @@ public class FreeBuilderTemplate {
 		private final SrcType $name$ = null;
 
 		@Matcher(type = Date.class)
-		public @interface isDate{}
-		
+		public @interface isDate {
+		}
+
 		@Matcher(type = List.class)
-		public @interface isList{}
-		
+		public @interface isList {
+		}
+
 		@Matcher(type = Set.class)
-		public @interface isSet{}
-		
-		
+		public @interface isSet {
+		}
+
 		@Switch
 		static class defensiveCopyFragment {
 			@isDate
-			@CodeFragment(imports = Date.class, code = "new Date(#{surrounded}.getTime())")
+			@CodeFragment(imports = Date.class,
+					code = "new Date(#{surrounded}.getTime())")
 			String copyDate;
-			
+
 			@isList
-			@CodeFragment(imports = {ArrayList.class, Collections.class}, code = "Collections.unmodifiableList(new ArrayList<>(#{surrounded}))")
+			@CodeFragment(imports = { ArrayList.class,
+					Collections.class },
+					code = "Collections.unmodifiableList(new ArrayList<>(#{surrounded}))")
 			String copyList;
-			
+
 			@isSet
-			@CodeFragment(imports = {HashSet.class, Collections.class}, code = "Collections.unmodifiableSet(new HashSet<>(#{surrounded}))")
+			@CodeFragment(imports = { HashSet.class,
+					Collections.class },
+					code = "Collections.unmodifiableSet(new HashSet<>(#{surrounded}))")
 			String copySet;
 		}
-		
-		@CodeFragment(code = "builder.#{name}", surroundingFragments = "defensiveCopyFragment")
-		static class rhs{}
-		
-	
+
+		@CodeFragment(code = "builder.#{name}",
+				surroundingFragments = "defensiveCopyFragment")
+		static class rhs {
+		}
+
 		@CodeFragment(code = "this.#{name} = #{rhs()};")
 		static class assignment {
 		}
@@ -89,7 +97,7 @@ public class FreeBuilderTemplate {
 		}
 
 		/**
-		 * @japkit.bodyBeforeIteratorCode
+		 * <li>japkit.bodyBeforeIteratorCode
 		 * 
 		 * <pre>
 		 * if (!(obj instanceof Value)) {
@@ -99,8 +107,8 @@ public class FreeBuilderTemplate {
 		 * return
 		 * </pre>
 		 * 
-		 * @japkit.bodyCode Objects.equals(#{name}, other.#{name})
-		 * @japkit.bodyAfterIteratorCode ;
+		 * <li>japkit.bodyCode Objects.equals(#{name}, other.#{name})
+		 * <li>japkit.bodyAfterIteratorCode ;
 		 */
 		@Method(imports = Objects.class,
 				bodyIterator = "#{properties}",
