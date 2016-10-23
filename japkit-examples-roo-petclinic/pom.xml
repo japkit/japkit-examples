@@ -251,7 +251,7 @@
 							<dependency>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>tycho-compiler-jdt</artifactId>
-								<version>0.26.0-SNAPSHOT</version>
+								<version>0.27.0-SNAPSHOT</version>
 							</dependency>
 						</dependencies>
 					</plugin>
