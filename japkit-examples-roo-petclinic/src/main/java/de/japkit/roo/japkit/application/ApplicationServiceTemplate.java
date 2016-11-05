@@ -41,14 +41,13 @@ import de.japkit.roo.japkit.domain.DomainLibrary.isVO;
 @Template() 
 public class ApplicationServiceTemplate {
 	
-	@Template(src="#{aggregateRoots}", srcVar="aggregate", 
+	@Template(src="#{aggregateRoots}",
 		libraries=DomainLibrary.class,	
 		vars={
 			@Var(name="aggregateName", expr="#{src.asElement.simpleName}"),
 			@Var(name="aggregateNameLower", expr="#{aggregateName.toFirstLower}"),
 			@Var(name="aggregateUpdateMethods", expr="#{publicVoid.filter(src.asElement.declaredMethods)}"),
 			@Var(name="aggregateCreateMethods", expr="#{hasParams.filter(src.asElement.declaredConstructors)}"),
-			@Var(name = "repository", expr="#{findRepository()}"),
 			@Var(name="repositoryName", expr="#{aggregateNameLower}Repository"),
 		
 		}
@@ -84,10 +83,10 @@ public class ApplicationServiceTemplate {
 				code=".#{src.setter.simpleName}(command.#{dtoGetter.simpleName}().#{src.getter.simpleName}())") //Quick&Dirty
 		class fluentVOSettersFromDTO{}
 
-		@ClassSelector
+		@Var(expr="#{findRepository()}")
 		public class Repository{}
 		
-		@ClassSelector
+		@Var()
 		public class Aggregate{}
 		
 		@Order(0)
@@ -117,7 +116,7 @@ public class ApplicationServiceTemplate {
 		class UpdateCommands{
 			@Order(1)
 			@Clazz(nameExpr="#{method.simpleName.toFirstUpper}Command", behaviorClass=BehaviorInnerClassWithGenClassPrefix.class)
-			@ClassSelector(expr="#{command.asType()}")
+			@Function(expr="#{command.asType()}")
 			@ResultVar("command")
 			@Template(
 				fieldDefaults=@Field(getter=@Getter, setter=@Setter),
@@ -150,7 +149,7 @@ public class ApplicationServiceTemplate {
 		class CreateCommands{
 			@Order(1)
 			@Clazz(nameExpr="Create#{aggregateName}Command")
-			@ClassSelector(expr="#{command.asType()}")
+			@Function(expr="#{command.asType()}")
 			@ResultVar("command")
 			@Template(fieldDefaults=@Field(getter=@Getter, setter=@Setter), 
 					 templates = {@TemplateCall(value=CommandFieldTemplate.class, src="#{src.parameters}"),

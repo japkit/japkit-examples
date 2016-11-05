@@ -1,7 +1,7 @@
 package de.japkit.roo.japkit.domain;
 
-import de.japkit.metaannotations.classselectors.ClassSelector;
+import de.japkit.metaannotations.Function;
 
-@ClassSelector
+@Function(expr="#{domainType}")
 public abstract class DomainType {
 }

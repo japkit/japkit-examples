@@ -42,7 +42,7 @@ public abstract class ValueObjectTemplate {
 	 * @japkit.code <pre>
 	 * <code>
 	 * if(#{param}==null){
-	 * 	throw new IllegalArgumentException("#{param} must not be null.");
+	 * 	throw new IllegalArgumentException("#{param} must not be null!");
 	 * }
 	 * </code>
 	 * </pre>
@@ -66,7 +66,7 @@ public abstract class ValueObjectTemplate {
 	@ClassSelector(kind = ClassSelectorKind.INNER_CLASS_NAME, enclosing = GeneratedClass.class)
 	public static abstract class Builder {
 
-		@ClassSelector(expr = "#{genClass.enclosingElement.asType()}")
+		@Function(expr = "#{genClass.enclosingElement.asType()}")
 		abstract static class EnclosingClass {
 		}
 

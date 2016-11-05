@@ -1,8 +1,8 @@
 package de.japkit.roo.japkit.web;
 
-import de.japkit.metaannotations.classselectors.ClassSelector;
+import de.japkit.metaannotations.Function;
 
-@ClassSelector
+@Function(expr="formBackingObject")
 public abstract class FormBackingObject {
 
 }

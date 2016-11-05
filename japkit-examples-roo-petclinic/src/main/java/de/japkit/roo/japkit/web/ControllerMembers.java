@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import de.japkit.annotations.RuntimeMetadata;
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.Field;
+import de.japkit.metaannotations.Function;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Template;
 import de.japkit.metaannotations.Var;
@@ -32,7 +33,7 @@ import de.japkit.roo.japkit.CommonLibrary.nameFirstLower;
 @RuntimeMetadata
 @Template(libraries=CommonLibrary.class)
 public abstract class ControllerMembers {
-	@ClassSelector
+	@Function(expr="applicationService")
 	class ApplicationService{}
 	
 	@Resource
@@ -152,7 +153,7 @@ public abstract class ControllerMembers {
 		public abstract String $cmdName$(@Valid Command $cmdName$, BindingResult bindingResult, Model uiModel,
 				RedirectAttributes redirectAttributes);
 	
-		@ClassSelector
+		@Function(expr="command")
 		class Command{}
 		
 		/**
