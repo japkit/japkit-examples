@@ -3,6 +3,7 @@ package de.japkit.roo.japkit.domain;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -33,6 +34,9 @@ public class DomainLibrary {
 	//TODO: Use "business-id" instead of technical. (UUID)
 	@Matcher(annotations=Id.class)
 	public class isId{}
+	
+	@Matcher(annotations=Version.class)
+	class isVersion{}
 	
 	// Some matchers for categorizing properties
 	

@@ -41,8 +41,8 @@ public @interface JapkitEntity {
 	static class SuperclassSelector {
 	};
 	
-	Class<?>[] createCommandProperties() default {};
+	String[] createCommandProperties() default {};
 	
-	Class<?>[] updateCommandProperties() default {};
+	String[] updateCommandProperties() default {};
 
 }

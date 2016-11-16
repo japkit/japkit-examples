@@ -10,6 +10,7 @@ import javax.persistence.Version;
 import de.japkit.metaannotations.Annotation;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
+import de.japkit.metaannotations.Function;
 import de.japkit.metaannotations.Matcher;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Param;
@@ -21,7 +22,7 @@ import de.japkit.metaannotations.classselectors.SrcType;
 
 @Template(vars = {@Var(name = "superconstructors",
 		expr = "#{genClass.superclass.asElement.declaredConstructors}"),
-		@Var(name="entityName", expr="#{genClass.simpleName}")})
+		@Var(name="entityName", expr="#{genClass.simpleName}")}, libraries=DomainLibrary.class)
 public abstract class EntityBehaviorMethods {
 	
 	@CodeFragment(iterator = "#{src}", code = "#{src.setter.simpleName}(#{src.simpleName});", indentAfterLinebreak=false)
@@ -57,10 +58,10 @@ public abstract class EntityBehaviorMethods {
 	 */
 	@Constructor(condFun = genClassNotAbstract.class,
 		vars = @Var(name="cmdPropertiesWhiteList", expr="#{createCommandProperties}"),
-		bodyCode="#{assignments(commandProperties())}"	
+		bodyCode="#{assignments(cmdProperties())}"	
 	)
 	public EntityBehaviorMethods(
-		@Param(src = "commandProperties", 
+		@Param(srcFun = cmdProperties.class, 
 			annotations = @Annotation(copyAnnotationsFromPackages={JSR303, SPRING_FORMAT})) 
 		SrcType $srcElementName$) {
 
@@ -68,16 +69,13 @@ public abstract class EntityBehaviorMethods {
 
 	@Method(condFun = genClassNotAbstract.class, 			
 			vars = @Var(name="cmdPropertiesWhiteList", expr="#{updateCommandProperties}"),
-			bodyCode="#{assignments(commandProperties())}")
+			bodyCode="#{assignments(cmdProperties())}")
 	public void update$entityName$(
-			@Param(src = "commandProperties", 
+			@Param(srcFun = cmdProperties.class, 
 				annotations = @Annotation(copyAnnotationsFromPackages={JSR303, SPRING_FORMAT})) 
 			SrcType $srcElementName$){}
 	
-	@Properties(sourceClass = GeneratedClass.class, 
-			includeNamesExpr = "cmdPropertiesWhiteList",
-			includeRules = @Matcher(condition="#{cmdPropertiesWhiteList.isEmpty()}"),
-			excludeRules={@Matcher(annotations=Id.class), @Matcher(annotations=Version.class)} )
-	class commandProperties{}
+	@Function(expr="#{genClass.properties}", filter="#{(cmdPropertiesWhiteList.isEmpty() || cmdPropertiesWhiteList.contains(name.toString())) && !(isId() || isVersion())}")
+	class cmdProperties{}
 
 }

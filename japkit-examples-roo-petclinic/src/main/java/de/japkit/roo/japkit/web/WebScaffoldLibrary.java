@@ -33,8 +33,11 @@ public class WebScaffoldLibrary {
 	@TypeQuery(annotation = JapkitWebScaffold.class, shadow = true)
 	class findAllControllers{} 
 	
-	@Properties(includeRules = @Matcher(annotationsNot = { Id.class, Version.class }))
+	@Function(expr="#{properties}", filterFun=isViewableProperty.class)
 	class viewableProperties{}
+	
+	@Matcher(annotationsNot = { Id.class, Version.class })
+	class isViewableProperty{};
 	
 	/**
 	 * @japkit.expr <pre>
