@@ -12,6 +12,7 @@ import de.japkit.annotations.RuntimeMetadata;
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
+import de.japkit.metaannotations.DefaultCase;
 import de.japkit.metaannotations.Field;
 import de.japkit.metaannotations.Getter;
 import de.japkit.metaannotations.InnerClass;
@@ -69,16 +70,18 @@ public class FreeBuilderTemplate {
 			String copyDate;
 
 			@isList
-			@CodeFragment(imports = { ArrayList.class,
-					Collections.class },
+			@CodeFragment(imports = { ArrayList.class, Collections.class },
 					code = "Collections.unmodifiableList(new ArrayList<>(#{surrounded}))")
 			String copyList;
 
 			@isSet
-			@CodeFragment(imports = { HashSet.class,
-					Collections.class },
+			@CodeFragment(imports = { HashSet.class, Collections.class },
 					code = "Collections.unmodifiableSet(new HashSet<>(#{surrounded}))")
 			String copySet;
+			
+			@DefaultCase
+			@CodeFragment(code="#{surrounded}")
+			String dflt;
 		}
 
 		@CodeFragment(code = "builder.#{name}",
