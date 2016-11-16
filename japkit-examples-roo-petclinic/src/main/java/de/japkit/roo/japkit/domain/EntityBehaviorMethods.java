@@ -4,8 +4,6 @@ import static de.japkit.roo.japkit.domain.AnnotationPackages.JSR303;
 import static de.japkit.roo.japkit.domain.AnnotationPackages.SPRING_FORMAT;
 
 import javax.lang.model.element.Modifier;
-import javax.persistence.Id;
-import javax.persistence.Version;
 
 import de.japkit.metaannotations.Annotation;
 import de.japkit.metaannotations.CodeFragment;
@@ -14,10 +12,8 @@ import de.japkit.metaannotations.Function;
 import de.japkit.metaannotations.Matcher;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Param;
-import de.japkit.metaannotations.Properties;
 import de.japkit.metaannotations.Template;
 import de.japkit.metaannotations.Var;
-import de.japkit.metaannotations.classselectors.GeneratedClass;
 import de.japkit.metaannotations.classselectors.SrcType;
 
 @Template(vars = {@Var(name = "superconstructors",

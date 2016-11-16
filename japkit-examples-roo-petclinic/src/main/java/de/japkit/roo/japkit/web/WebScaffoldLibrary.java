@@ -7,7 +7,6 @@ import de.japkit.annotations.RuntimeMetadata;
 import de.japkit.metaannotations.Function;
 import de.japkit.metaannotations.Library;
 import de.japkit.metaannotations.Matcher;
-import de.japkit.metaannotations.Properties;
 import de.japkit.metaannotations.TypeQuery;
 import de.japkit.roo.japkit.application.DTO;
 
