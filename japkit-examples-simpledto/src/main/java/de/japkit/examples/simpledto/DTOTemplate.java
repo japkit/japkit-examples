@@ -7,10 +7,10 @@ import de.japkit.metaannotations.Getter;
 import de.japkit.metaannotations.Setter;
 import de.japkit.metaannotations.classselectors.SrcType;
 
-@RuntimeMetadata
 @Clazz(nameSuffixToAppend = "DTO")
+@RuntimeMetadata
 public class DTOTemplate implements SrcInterface {
-	@Field(src = "#{properties}",
+	@Field(src = "#{src.properties}",
 			getter = @Getter,
 			setter = @Setter)
 	private SrcType $name$;
