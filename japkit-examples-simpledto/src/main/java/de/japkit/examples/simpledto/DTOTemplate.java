@@ -14,4 +14,12 @@ public class DTOTemplate implements SrcInterface {
 			getter = @Getter,
 			setter = @Setter)
 	private SrcType $name$;
+	
+	/**
+	 * @japkit.bodyCode return "A #{src.simpleName}.";
+	 */
+	@Override
+	public String toString() {
+		return null;
+	}
 }
