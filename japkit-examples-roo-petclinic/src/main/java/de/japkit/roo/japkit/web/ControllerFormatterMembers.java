@@ -14,7 +14,7 @@ public abstract class ControllerFormatterMembers implements FormatterRegistrar, 
 	
 
 		@Method(imports={EntityConverterUtil.class} ,
-				bodyCode="EntityConverterUtil.registerConverters(#{fbo.name}.class, registry, crudOperations(), this);")
+				bodyCode="EntityConverterUtil.registerConverters(#{fbo.code}.class, registry, crudOperations(), this);")
 		@ParamNames("registry")
 		@Override
 		public void registerFormatters(FormatterRegistry registry) {
