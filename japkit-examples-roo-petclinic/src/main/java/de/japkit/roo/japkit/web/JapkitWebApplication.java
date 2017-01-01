@@ -1,5 +1,7 @@
 package de.japkit.roo.japkit.web;
 
+import static de.japkit.metaannotations.TemplateLang.GSTRING_TEMPLATE;
+
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.ResourceLocation;
 import de.japkit.metaannotations.ResourceTemplate;
@@ -11,9 +13,9 @@ import de.japkit.roo.japkit.Layers;
 @Trigger(layer=Layers.WEB_APP, libraries=WebScaffoldLibrary.class, vars={
 		@Var(name = "controllers", ifEmpty=true, expr="#{findAllControllers()}")})
 @ResourceTemplate.List({
-		@ResourceTemplate(templateLang = "GStringTemplate", templateName = "application.jspx", pathExpr = "i18n",
+		@ResourceTemplate(templateLang = GSTRING_TEMPLATE, templateName = "application.jspx", pathExpr = "i18n",
 				nameExpr = "application.properties", location = ResourceLocation.WEBINF),
-		@ResourceTemplate(templateLang = "GStringTemplate", templateName = "menu.jspx", pathExpr = "views",
+		@ResourceTemplate(templateLang = GSTRING_TEMPLATE, templateName = "menu.jspx", pathExpr = "views",
 				location = ResourceLocation.WEBINF) })
 @Clazz(templates=@TemplateCall(JapkitWebApplicationTemplate.class))
 public @interface JapkitWebApplication {

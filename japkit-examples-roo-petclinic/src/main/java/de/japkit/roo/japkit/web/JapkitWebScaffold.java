@@ -1,5 +1,7 @@
 package de.japkit.roo.japkit.web;
 
+import static de.japkit.metaannotations.TemplateLang.GSTRING_TEMPLATE;
+
 import javax.lang.model.element.Modifier;
 import javax.lang.model.type.TypeMirror;
 
@@ -21,7 +23,6 @@ import de.japkit.roo.japkit.application.ApplicationServiceLibrary.findUpdateComm
 import de.japkit.roo.japkit.domain.DomainLibrary;
 import de.japkit.roo.japkit.domain.DomainLibrary.findRepository;
 import de.japkit.roo.japkit.domain.DomainLibrary.isDatetime;
-import de.japkit.roo.japkit.domain.DomainLibrary.isEntity;
 import de.japkit.roo.japkit.domain.DomainLibrary.isEnum;
 import de.japkit.roo.japkit.web.WebScaffoldLibrary.allPropertyNames;
 import de.japkit.roo.japkit.web.WebScaffoldLibrary.findViewModel;
@@ -75,7 +76,7 @@ import de.japkit.roo.japkit.web.WebScaffoldLibrary.viewableProperties;
 				})
 @ResourceTemplate.List({
 		@ResourceTemplate(src="#{createCommands.get(0)}", srcVar="cmdMethod", 
-				templateLang = "GStringTemplate", templateName = "createOrUpdate.jspx", pathExpr = "views/#{path}",
+				templateLang = GSTRING_TEMPLATE, templateName = "createOrUpdate.jspx", pathExpr = "views/#{path}",
 				nameExpr = "create.jspx", location = ResourceLocation.WEBINF, 
 				vars ={ @Var(name = "update", expr = "#{false}"), 
 					@Var(name="command", expr="#{cmdMethod.command()}"),
@@ -83,7 +84,7 @@ import de.japkit.roo.japkit.web.WebScaffoldLibrary.viewableProperties;
 					@Var(name = "viewProperties", expr="#{command.properties}"),
 				}),
 		@ResourceTemplate(src="#{createCommands}", srcVar="cmdMethod",
-				templateLang = "GStringTemplate", templateName = "command_i18n.jspx", pathExpr = "i18n/#{path}",
+				templateLang = GSTRING_TEMPLATE, templateName = "command_i18n.jspx", pathExpr = "i18n/#{path}",
 				nameExpr = "#{cmdMethod.simpleName}.properties", location = ResourceLocation.WEBINF, 
 				vars = {
 					@Var(name="command", expr="#{cmdMethod.command()}"),
@@ -91,7 +92,7 @@ import de.japkit.roo.japkit.web.WebScaffoldLibrary.viewableProperties;
 					@Var(name = "cmdPropertyNames", expr="#{allPropertyNames(command.properties)}"),
 				}),
 		@ResourceTemplate(src="#{updateCommands}", srcVar="cmdMethod",
-				templateLang = "GStringTemplate", templateName = "createOrUpdate.jspx", pathExpr = "views/#{path}",
+				templateLang = GSTRING_TEMPLATE, templateName = "createOrUpdate.jspx", pathExpr = "views/#{path}",
 				nameExpr = "#{cmdMethod.simpleName.toFirstLower}.jspx", location = ResourceLocation.WEBINF, 
 				vars = {
 					@Var(name = "update", expr = "#{true}"),
@@ -100,16 +101,16 @@ import de.japkit.roo.japkit.web.WebScaffoldLibrary.viewableProperties;
 					@Var(name = "viewProperties", expr="#{command.properties}"),
 				}),
 		@ResourceTemplate(src="#{updateCommands}", srcVar="cmdMethod",
-				templateLang = "GStringTemplate", templateName = "command_i18n.jspx", pathExpr = "i18n/#{path}",
+				templateLang = GSTRING_TEMPLATE, templateName = "command_i18n.jspx", pathExpr = "i18n/#{path}",
 				nameExpr = "#{cmdMethod.simpleName}.properties", location = ResourceLocation.WEBINF, 
 				vars = {
 					@Var(name="command", expr="#{cmdMethod.command()}"),
 					@Var(name="cmdName", expr="#{cmdMethod.simpleName}"),
 					@Var(name = "cmdPropertyNames", expr="#{allPropertyNames(command.properties)}"),
 				}),
-		@ResourceTemplate(templateLang = "GStringTemplate", templateName = "show.jspx", location = ResourceLocation.WEBINF,
+		@ResourceTemplate(templateLang = GSTRING_TEMPLATE, templateName = "show.jspx", location = ResourceLocation.WEBINF,
 				pathExpr = "views/#{path}"),
-		@ResourceTemplate(templateLang = "GStringTemplate", templateName = "list.jspx", location = ResourceLocation.WEBINF,
+		@ResourceTemplate(templateLang = GSTRING_TEMPLATE, templateName = "list.jspx", location = ResourceLocation.WEBINF,
 				pathExpr = "views/#{path}") })
 public @interface JapkitWebScaffold {
 

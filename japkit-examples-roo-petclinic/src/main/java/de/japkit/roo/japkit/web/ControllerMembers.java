@@ -19,10 +19,10 @@ import de.japkit.annotations.RuntimeMetadata;
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.Field;
 import de.japkit.metaannotations.Function;
+import de.japkit.metaannotations.Lang;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Template;
 import de.japkit.metaannotations.Var;
-import de.japkit.metaannotations.classselectors.ClassSelector;
 import de.japkit.roo.base.web.ControllerUtil;
 import de.japkit.roo.base.web.ResourceBundleNameProvider;
 import de.japkit.roo.japkit.CommonLibrary;
@@ -121,7 +121,7 @@ public abstract class ControllerMembers {
 		 * </code>
 		 * </pre>
 		 */
-		@Method(bodyLang="GStringTemplateInline")
+		@Method(bodyLang=Lang.GSTRING_TEMPLATE)
 		public abstract String[] getResourceBundleBaseNames();
 	}
 	
