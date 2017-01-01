@@ -3,7 +3,9 @@ jdk:
   - oraclejdk8
 env:
   matrix:
-    - PROFILE=javac
-    - PROFILE=jdt
+    - PROFILES=javac
+    - PROFILES=jdt
+    - PROFILES=javac,el3
+    - PROFILES=jdt,el3
     
-script: "mvn clean install -P ${PROFILE}"
+script: "mvn clean install -P ${PROFILES}"
