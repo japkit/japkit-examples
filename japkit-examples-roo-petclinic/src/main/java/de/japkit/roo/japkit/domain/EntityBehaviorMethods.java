@@ -5,6 +5,7 @@ import static de.japkit.roo.japkit.domain.AnnotationPackages.SPRING_FORMAT;
 
 import javax.lang.model.element.Modifier;
 
+import de.japkit.functions.SrcType;
 import de.japkit.metaannotations.Annotation;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
@@ -14,7 +15,6 @@ import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Param;
 import de.japkit.metaannotations.Template;
 import de.japkit.metaannotations.Var;
-import de.japkit.metaannotations.classselectors.SrcType;
 
 @Template(vars = {@Var(name = "superconstructors",
 		expr = "#{genClass.superclass.asElement.declaredConstructors}"),

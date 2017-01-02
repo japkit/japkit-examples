@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import de.japkit.annotations.RuntimeMetadata;
+import de.japkit.functions.SrcType;
 import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
@@ -22,7 +23,6 @@ import de.japkit.metaannotations.Setter;
 import de.japkit.metaannotations.Switch;
 import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.GeneratedClass;
-import de.japkit.metaannotations.classselectors.SrcType;
 
 @RuntimeMetadata
 @Clazz(nameSuffixToAppend = "Builder")

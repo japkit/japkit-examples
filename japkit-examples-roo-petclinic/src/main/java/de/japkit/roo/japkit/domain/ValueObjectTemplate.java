@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import de.japkit.annotations.Order;
 import de.japkit.annotations.ParamNames;
 import de.japkit.annotations.RuntimeMetadata;
+import de.japkit.functions.SrcType;
 import de.japkit.metaannotations.Annotation;
 import de.japkit.metaannotations.Case;
 import de.japkit.metaannotations.CodeFragment;
@@ -29,7 +30,6 @@ import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.ClassSelector;
 import de.japkit.metaannotations.classselectors.ClassSelectorKind;
 import de.japkit.metaannotations.classselectors.GeneratedClass;
-import de.japkit.metaannotations.classselectors.SrcType;
 
 @RuntimeMetadata
 @Template(vars=@Var(name="properties", expr="#{src.declaredFields}"))
