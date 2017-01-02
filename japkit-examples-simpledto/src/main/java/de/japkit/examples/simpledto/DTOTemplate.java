@@ -17,10 +17,12 @@ public class DTOTemplate implements SrcInterface {
 	private SrcType $name$;
 
 	/**
+	 * <ul>
 	 * <li>japkit.bodyBeforeIteratorCode return "#{name} {"+
 	 * <li>japkit.bodyCode "#{name}=" + #{name} +
 	 * <li>japkit.bodySeparator ", " +
 	 * <li>japkit.bodyAfterIteratorCode "}";
+	 * </ul>
 	 */
 	@Method(bodyIterator = "#{properties}",
 			bodyIndentAfterLinebreak = true)
