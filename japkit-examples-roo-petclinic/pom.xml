@@ -151,6 +151,11 @@
 							<artifactId>${japkit.all.artifact}</artifactId>
 							<version>${japkit.version}</version>
 						</path>
+						<path>
+							<groupId>org.hibernate</groupId>
+						    <artifactId>hibernate-jpamodelgen</artifactId>
+						    <version>4.3.7.Final</version>
+						</path>
 					</annotationProcessorPaths>
 					<generatedSourcesDirectory>${project.build.directory}/src/main/generated-sources</generatedSourcesDirectory>
 					<generatedTestSourcesDirectory>${project.build.directory}/src/main/generated-test-sources</generatedTestSourcesDirectory>
