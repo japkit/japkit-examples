@@ -24,12 +24,16 @@ import de.japkit.metaannotations.Switch;
 import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.GeneratedClass;
 
+/**
+ * The builder implementation for the value object #{voInterface.simpleName}.
+ *
+ */
 @RuntimeMetadata
 @Clazz(nameSuffixToAppend = "Builder")
 public class FreeBuilderTemplate {
 
 	@Var(fun = SrcType.class)
-	interface Interfaze {
+	interface VoInterface {
 	};
 
 	@Var(fun = GeneratedClass.class)
@@ -38,13 +42,17 @@ public class FreeBuilderTemplate {
 
 	@Field(src = "#{properties}",
 			srcVar = "p",
-			getter = @Getter(commentExpr = "the value that will be returned by {@link #{interfaze.simpleName}##{p.getter.simpleName}()}."),
+			getter = @Getter(commentExpr = "the value that will be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."),
 			setter = @Setter(chain = true,
-					commentExpr = "the value to be returned by {@link #{interfaze.simpleName}##{p.getter.simpleName}()}."))
+					commentExpr = "the value to be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."))
 	private SrcType $name$;
 
+	/**
+	 *  The implementation of the value object #{voInterface.simpleName}.
+	 *
+	 */
 	@InnerClass
-	static final class Value implements Interfaze {
+	static final class Value implements VoInterface {
 		@Field(src = "#{properties}",
 				srcVar = "p",
 				getter = @Getter())
@@ -100,6 +108,7 @@ public class FreeBuilderTemplate {
 		}
 
 		/**
+		 * <ul>
 		 * <li>japkit.bodyBeforeIteratorCode
 		 * 
 		 * <pre>
@@ -109,9 +118,10 @@ public class FreeBuilderTemplate {
 		 * Value other = (Value) obj;
 		 * return
 		 * </pre>
-		 * 
+		 *  
 		 * <li>japkit.bodyCode Objects.equals(#{name}, other.#{name})
 		 * <li>japkit.bodyAfterIteratorCode ;
+		 * </ul>
 		 */
 		@Method(imports = Objects.class,
 				bodyIterator = "#{properties}",
@@ -135,7 +145,7 @@ public class FreeBuilderTemplate {
 		}
 
 		/**
-		 * @japkit.bodyBeforeIteratorCode return "#{interfaze.simpleName} {"+
+		 * @japkit.bodyBeforeIteratorCode return "#{voInterface.simpleName} {"+
 		 * @japkit.bodyCode "#{name}=" + #{name} +
 		 * @japkit.bodySeparator ", " +
 		 * @japkit.bodyAfterIteratorCode "}";
