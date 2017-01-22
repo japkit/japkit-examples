@@ -29,7 +29,6 @@ import de.japkit.metaannotations.Template;
 import de.japkit.metaannotations.TemplateCall;
 import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.BehaviorInnerClassWithGenClassPrefix;
-import de.japkit.metaannotations.classselectors.ClassSelector;
 import de.japkit.roo.japkit.CommonLibrary.type;
 import de.japkit.roo.japkit.domain.DomainLibrary;
 import de.japkit.roo.japkit.domain.DomainLibrary.findIdProperty;
@@ -115,16 +114,16 @@ public class ApplicationServiceTemplate {
 		@Template(src="aggregateUpdateMethods", srcVar="method")
 		class UpdateCommands{
 			@Order(1)
-			@Clazz(nameExpr="#{method.simpleName.toFirstUpper}Command", behaviorClass=BehaviorInnerClassWithGenClassPrefix.class)
+			@Clazz(nameExpr="#{method.simpleName.toFirstUpper}Command", 
+				behaviorClass=BehaviorInnerClassWithGenClassPrefix.class, 
+				templates = @TemplateCall(value=CommandFieldTemplate.class, src="#{src.parameters}"))
 			@Function(expr="#{command.asType()}")
 			@ResultVar("command")
-			@Template(
-				fieldDefaults=@Field(getter=@Getter, setter=@Setter),
-				allFieldsAreTemplates=true,
-				templates = @TemplateCall(value=CommandFieldTemplate.class, src="#{src.parameters}"))
 			public class Command{
+				@Field(getter=@Getter, setter=@Setter)
 				Long id; //TODO: GUID instead of DB ID !
 				
+				@Field(getter=@Getter, setter=@Setter)
 				Long version;		
 			};
 			
@@ -148,12 +147,9 @@ public class ApplicationServiceTemplate {
 		@Template(src="aggregateCreateMethods", srcVar="method")
 		class CreateCommands{
 			@Order(1)
-			@Clazz(nameExpr="Create#{aggregateName}Command")
+			@Clazz(nameExpr="Create#{aggregateName}Command", templates = @TemplateCall(value=CommandFieldTemplate.class, src="#{src.parameters}"))
 			@Function(expr="#{command.asType()}")
 			@ResultVar("command")
-			@Template(fieldDefaults=@Field(getter=@Getter, setter=@Setter), 
-					 templates = {@TemplateCall(value=CommandFieldTemplate.class, src="#{src.parameters}"),
-				})
 			public class CreateCommand{};
 			
 			
