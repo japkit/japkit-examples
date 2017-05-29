@@ -210,7 +210,7 @@
 					</configuration>
 					<dependencies>
 						<dependency>
-							<groupId>com.github.stefanocke.japkit</groupId>
+							<groupId>com.github.japkit</groupId>
 							<artifactId>${japkit.all.artifact}</artifactId>
 							<version>${japkit.version}</version>
 						</dependency>
