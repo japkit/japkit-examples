@@ -46,6 +46,9 @@ public interface Person {
 	
 	AddressBuilder.Value getAddressGenerated();
 	
+	@NotNull
+	AddressBuilder.Value getAddressGeneratedWithTypeAnnotation();
+	
 	List<AddressBuilder.Value> getAddressGeneratedList();
 	
 

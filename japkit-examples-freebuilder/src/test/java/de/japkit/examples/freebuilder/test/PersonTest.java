@@ -47,9 +47,13 @@ public class PersonTest {
 		p.notCollectionMatcherAddressGenerated();
 		p.singleValueNotPrimitiveMatcherAddressGenerated();
 		
-		p.getAddressGeneratedList();
+		List<Value> addressGeneratedList = p.getAddressGeneratedList();
 		p.collectionMatcherAddressGeneratedList();
 		p.singleValueNotPrimitiveMatcherAddressGeneratedList();
+		
+		Value addressGeneratedWithTypeAnnotation = p.getAddressGeneratedWithTypeAnnotation();
+		p.notCollectionMatcherAddressGeneratedWithTypeAnnotation();
+		p.singleValueNotPrimitiveMatcherAddressGeneratedWithTypeAnnotation();
 		
 		
 	}
