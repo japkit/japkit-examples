@@ -28,7 +28,15 @@ public interface Person {
 	@NotNull
 	int getIntWithTypeAnnotation();
 	
+	@NotNull
+	Integer getIntegerWithTypeAnnotation();
+	
 	int[] getIntArray();
+	
+	List<String> getStringList();
+	
+	@NotNull
+	List<? extends Number> getWildcardExtendsNumberList();
 	
 
 	/** Builder of {@link Person} instances. */

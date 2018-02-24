@@ -21,6 +21,7 @@ import de.japkit.metaannotations.Matcher;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Setter;
 import de.japkit.metaannotations.Switch;
+import de.japkit.metaannotations.TypeCategory;
 import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.GeneratedClass;
 
@@ -35,13 +36,16 @@ public class FreeBuilderTemplate {
 	@Var(fun = SrcType.class)
 	interface VoInterface {
 	};
+	
+	
 
 	@Var(fun = GeneratedClass.class)
 	class Builder {
 	};
 
 	/**
-	 * #{src.asType().annotationMirrors.toString()} 
+	 * #{src.asType().toString()} 
+	 * #{src.singleValueType.toString()} 
 	 */
 	@Field(src = "#{properties}", 
 			srcVar = "p",
@@ -49,6 +53,12 @@ public class FreeBuilderTemplate {
 			setter = @Setter(chain = true,
 					commentExpr = "the value to be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."))
 	private SrcType $name$;
+	
+	@Matcher(typeCategory=TypeCategory.PRIMITIVE)
+	class PrimitiveMatcher{}
+	
+	@Method(src = "#{properties}", srcFilterFun = PrimitiveMatcher.class)
+	void primitiveMatcher$name$(){};
 
 	/**
 	 *  The implementation of the value object #{voInterface.simpleName}.
