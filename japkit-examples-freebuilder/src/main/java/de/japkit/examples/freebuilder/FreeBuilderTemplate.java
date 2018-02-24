@@ -59,7 +59,37 @@ public class FreeBuilderTemplate {
 	
 	@Method(src = "#{properties}", srcFilterFun = PrimitiveMatcher.class)
 	void primitiveMatcher$name$(){};
+	
+	@Matcher(singleValueTypeCategory=TypeCategory.PRIMITIVE)
+	class SingleValuePrimitiveMatcher{}
+	
+	@Method(src = "#{properties}", srcFilterFun = SingleValuePrimitiveMatcher.class)
+	void singleValuePrimitiveMatcher$name$(){};
+	
+	@Matcher(singleValueTypeCategoryNot=TypeCategory.PRIMITIVE)
+	class SingleValueNotPrimitiveMatcher{}
+	
+	@Method(src = "#{properties}", srcFilterFun = SingleValueNotPrimitiveMatcher.class)
+	void singleValueNotPrimitiveMatcher$name$(){};
+	
+	@Matcher(typeCategory=TypeCategory.ARRAY)
+	class ArrayMatcher{}
 
+	@Method(src = "#{properties}", srcFilterFun = ArrayMatcher.class)
+	void arrayMatcher$name$(){};
+	
+	@Matcher(typeCategory=TypeCategory.COLLECTION)
+	class CollectionMatcher{}
+	
+	@Method(src = "#{properties}", srcFilterFun = CollectionMatcher.class)
+	void collectionMatcher$name$(){};
+	
+	@Matcher(typeCategoryNot=TypeCategory.COLLECTION)
+	class NotCollectionMatcher{}
+	
+	@Method(src = "#{properties}", srcFilterFun = NotCollectionMatcher.class)
+	void notCollectionMatcher$name$(){};
+	
 	/**
 	 *  The implementation of the value object #{voInterface.simpleName}.
 	 *
