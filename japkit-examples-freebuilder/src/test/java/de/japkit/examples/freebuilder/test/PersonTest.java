@@ -2,6 +2,8 @@ package de.japkit.examples.freebuilder.test;
 
 import java.util.List;
 
+import de.japkit.examples.freebuilder.test.AddressBuilder.Value;
+
 public class PersonTest {
 	
 	private PersonBuilder p;
@@ -41,7 +43,13 @@ public class PersonTest {
 		Number number = p.getWildcardExtendsNumberList().get(0);
 		p.collectionMatcherWildcardExtendsNumberList();
 		
+		Value addressGenerated = p.getAddressGenerated();
+		p.notCollectionMatcherAddressGenerated();
+		p.singleValueNotPrimitiveMatcherAddressGenerated();
 		
+		p.getAddressGeneratedList();
+		p.collectionMatcherAddressGeneratedList();
+		p.singleValueNotPrimitiveMatcherAddressGeneratedList();
 		
 		
 	}

@@ -38,6 +38,16 @@ public interface Person {
 	@NotNull
 	List<? extends Number> getWildcardExtendsNumberList();
 	
+	Address getAddress();
+	
+	List<Address> getAddressList();
+	
+	List<? extends Address> getWildcardAddressList();
+	
+	AddressBuilder.Value getAddressGenerated();
+	
+	List<AddressBuilder.Value> getAddressGeneratedList();
+	
 
 	/** Builder of {@link Person} instances. */
 	class Builder extends PersonBuilder {
