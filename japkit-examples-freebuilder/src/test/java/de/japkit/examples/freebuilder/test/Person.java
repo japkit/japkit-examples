@@ -19,6 +19,10 @@ public interface Person {
 	List<String> getTelephoneNumbers();
 	
 	Set<String> getNicknames();
+	
+	String[] getStringArray();
+	
+	int[] getIntArray();
 
 	/** Builder of {@link Person} instances. */
 	class Builder extends PersonBuilder {
