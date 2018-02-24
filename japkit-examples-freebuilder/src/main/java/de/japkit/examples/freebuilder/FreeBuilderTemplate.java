@@ -40,7 +40,10 @@ public class FreeBuilderTemplate {
 	class Builder {
 	};
 
-	@Field(src = "#{properties}",
+	/**
+	 * #{src.asType().annotationMirrors.toString()} 
+	 */
+	@Field(src = "#{properties}", 
 			srcVar = "p",
 			getter = @Getter(commentExpr = "the value that will be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."),
 			setter = @Setter(chain = true,

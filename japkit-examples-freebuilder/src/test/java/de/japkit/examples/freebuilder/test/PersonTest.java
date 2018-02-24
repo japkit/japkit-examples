@@ -9,7 +9,11 @@ public class PersonTest {
 		
 		String[] stringArray = p.getStringArray();
 		
+		String[] stringArrayWithTypeAnnotation = p.getStringArrayWithTypeAnnotation();
+		
 		int[] intArray = p.getIntArray();
+		
+		int intWithTypeAnnotation = p.getIntWithTypeAnnotation();
 	}
 
 }

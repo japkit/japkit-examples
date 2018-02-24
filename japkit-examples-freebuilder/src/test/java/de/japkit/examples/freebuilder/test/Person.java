@@ -22,7 +22,14 @@ public interface Person {
 	
 	String[] getStringArray();
 	
+	@NotNull
+	String[] getStringArrayWithTypeAnnotation();
+	
+	@NotNull
+	int getIntWithTypeAnnotation();
+	
 	int[] getIntArray();
+	
 
 	/** Builder of {@link Person} instances. */
 	class Builder extends PersonBuilder {
