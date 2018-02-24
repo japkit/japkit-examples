@@ -3,11 +3,14 @@ package de.japkit.examples.freebuilder.test;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.NotNull;
+
 import de.japkit.examples.freebuilder.FreeBuilder;
 
 @FreeBuilder
 public interface Person {
 	/** Returns the person's full (English) name. */
+	@NotNull
 	String getName();
 
 	/** Returns the person's age in years, rounded down. */
