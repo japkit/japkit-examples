@@ -46,6 +46,7 @@ public class FreeBuilderTemplate {
 	/**
 	 * #{src.asType().toString()} 
 	 * #{src.singleValueType.toString()} 
+	 * #{src.asType().kind} 
 	 */
 	@Field(src = "#{properties}", 
 			srcVar = "p",
@@ -89,6 +90,12 @@ public class FreeBuilderTemplate {
 	
 	@Method(src = "#{properties}", srcFilterFun = NotCollectionMatcher.class)
 	void notCollectionMatcher$name$(){};
+	
+	@Matcher(typeCategory=TypeCategory.MAP)
+	class MapMatcher{}
+	
+	@Method(src = "#{properties}", srcFilterFun = MapMatcher.class)
+	void mapMatcher$name$(){};
 	
 	/**
 	 *  The implementation of the value object #{voInterface.simpleName}.
