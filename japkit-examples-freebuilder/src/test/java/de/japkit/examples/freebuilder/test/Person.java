@@ -10,6 +10,7 @@ import de.japkit.examples.freebuilder.FreeBuilder;
 
 @FreeBuilder
 public interface Person {
+	
 	/** Returns the person's full (English) name. */
 	@NotNull
 	String getName();
@@ -43,6 +44,9 @@ public interface Person {
 	List<? extends Number> getWildcardExtendsNumberList();
 
 	Address getAddress();
+	
+	@NotNull
+	Address getAddressWithTypeAnnotation();
 
 	List<Address> getAddressList();
 
@@ -65,6 +69,15 @@ public interface Person {
 	@NotNull
 	Map<String, AddressBuilder.Value> getAddressGeneratedMapWithTypeAnnotation();
 
+	@NotNull	
+	SomeAnnotatedClass getSomeAnnotatedClassWithTypeAnnotation();
+	
+	@NotNull	
+	List<SomeAnnotatedClass> getSomeAnnotatedClassWithTypeAnnotationList();
+	
+	List<SomeAnnotatedClass> getSomeAnnotatedClassList();
+	
+	
 	/** Builder of {@link Person} instances. */
 	class Builder extends PersonBuilder {
 	}

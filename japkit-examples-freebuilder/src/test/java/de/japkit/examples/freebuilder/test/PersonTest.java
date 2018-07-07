@@ -48,17 +48,22 @@ public class PersonTest {
 		Number number = p.getWildcardExtendsNumberList().get(0);
 		p.collectionMatcherWildcardExtendsNumberList();
 		
+		
+		
 		Value addressGenerated = p.getAddressGenerated();
 		p.notCollectionMatcherAddressGenerated();
 		p.singleValueNotPrimitiveMatcherAddressGenerated();
+		p.singleValueHasFooBarAnnotationMatcherAddressGenerated();
 		
 		List<Value> addressGeneratedList = p.getAddressGeneratedList();
 		p.collectionMatcherAddressGeneratedList();
 		p.singleValueNotPrimitiveMatcherAddressGeneratedList();
+		p.singleValueHasFooBarAnnotationMatcherAddressGeneratedList();
 		
 		Value addressGeneratedWithTypeAnnotation = p.getAddressGeneratedWithTypeAnnotation();
 		p.notCollectionMatcherAddressGeneratedWithTypeAnnotation();
 		p.singleValueNotPrimitiveMatcherAddressGeneratedWithTypeAnnotation();
+		p.singleValueHasFooBarAnnotationMatcherAddressGeneratedWithTypeAnnotation();
 		
 		
 		Map<String, String> stringMap = p.getStringMap();
@@ -74,12 +79,23 @@ public class PersonTest {
 		p.notCollectionMatcherAddressGeneratedMap();
 		p.singleValueNotPrimitiveMatcherAddressGeneratedMap();
 		p.mapMatcherAddressGeneratedMap();
+		p.singleValueHasFooBarAnnotationMatcherAddressGeneratedMap();
 		
 		
 		Map<String, Value> addressGeneratedMapWithTypeAnnotation = p.getAddressGeneratedMapWithTypeAnnotation();
 		p.notCollectionMatcherAddressGeneratedMapWithTypeAnnotation();
 		p.singleValueNotPrimitiveMatcherAddressGeneratedMapWithTypeAnnotation();
 		p.mapMatcherAddressGeneratedMapWithTypeAnnotation();
+		p.singleValueHasFooBarAnnotationMatcherAddressGeneratedMapWithTypeAnnotation();
+		
+		SomeAnnotatedClass someAnnotatedClassWithTypeAnnotation = p.getSomeAnnotatedClassWithTypeAnnotation();
+		p.singleValueHasFooBarAnnotationMatcherSomeAnnotatedClassWithTypeAnnotation();
+		
+		List<SomeAnnotatedClass> someAnnotatedClassWithTypeAnnotationList = p.getSomeAnnotatedClassWithTypeAnnotationList();
+		p.singleValueHasFooBarAnnotationMatcherSomeAnnotatedClassWithTypeAnnotationList();
+		
+		List<SomeAnnotatedClass> someAnnotatedClassList = p.getSomeAnnotatedClassList();
+		p.singleValueHasFooBarAnnotationMatcherSomeAnnotatedClassList();
 	}
 
 }

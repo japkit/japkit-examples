@@ -47,6 +47,8 @@ public class FreeBuilderTemplate {
 	 * #{src.asType().toString()} 
 	 * #{src.singleValueType.toString()} 
 	 * #{src.asType().kind} 
+	 * #{src.singleValueType.asElement().getClass()} 
+	 * #{src.singleValueType.asElement().annotationMirrors.toString()} 
 	 */
 	@Field(src = "#{properties}", 
 			srcVar = "p",
@@ -97,11 +99,18 @@ public class FreeBuilderTemplate {
 	@Method(src = "#{properties}", srcFilterFun = MapMatcher.class)
 	void mapMatcher$name$(){};
 	
+	@Matcher(singleValueTypeAnnotations=FooBarAnnotation.class)
+	class SingleValueHasFooBarAnnotationMatcher{}
+	
+	@Method(src = "#{properties}", srcFilterFun = SingleValueHasFooBarAnnotationMatcher.class)
+	void singleValueHasFooBarAnnotationMatcher$name$(){};
+	
 	/**
 	 *  The implementation of the value object #{voInterface.simpleName}.
 	 *
 	 */
 	@InnerClass
+	@FooBarAnnotation
 	static final class Value implements VoInterface {
 		@Field(src = "#{properties}",
 				srcVar = "p",
