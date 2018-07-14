@@ -70,7 +70,7 @@ public class ApplicationServiceTemplate {
 							@Case(cond ="#{src.asType().asElement.ValueObject != null}", 
 								value="new #{src.asType().code}.Builder()#{fluentVOSettersFromDTO()}.build()" ),
 							//TODO: Das ist Q&D, da es davon augeht, dass der App-Service alle Aggregate bzw. ihre Repos kennt
-							@Case(condFun = DomainLibrary.isEntity.class, value = "#{src.singleValueType.simpleName.toFirstLower}Repository.findOne(command.#{findGetter(cmdProperties, src).simpleName}())"),
+							@Case(condFun = DomainLibrary.isEntity.class, value = "#{src.singleValueType.simpleName.toFirstLower}Repository.findById(command.#{findGetter(cmdProperties, src).simpleName}()).orElse(null)"),
 					},
 					code="command.#{findGetter(cmdProperties, src).simpleName}()")
 		class paramsFromCommand{}
@@ -182,7 +182,7 @@ public class ApplicationServiceTemplate {
 		/**
 		 *  @japkit.bodyCode <pre>
 		 * <code>
-		 * #{aggregate.code} #{aggregateNameLower} = #{repositoryName}.findOne(id);
+		 * #{aggregate.code} #{aggregateNameLower} = #{repositoryName}.findById(id).orElse(null);
 		 * if(#{aggregateNameLower}==null){
 		 * 	throw new IllegalArgumentException("#{aggregateName} not found for id:"+id);
 		 * }

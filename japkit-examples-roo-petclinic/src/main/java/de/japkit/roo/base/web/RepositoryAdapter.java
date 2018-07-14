@@ -18,7 +18,7 @@ public class RepositoryAdapter<T> implements CrudOperations<T> {
 
 	@Override
 	public void remove(Long id) {
-		repository.delete(id);
+		repository.deleteById(id);
 
 	}
 
@@ -34,7 +34,7 @@ public class RepositoryAdapter<T> implements CrudOperations<T> {
 
 	@Override
 	public T find(Long id) {
-		return repository.findOne(id);
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class RepositoryAdapter<T> implements CrudOperations<T> {
 	@Override
 	public List<T> findAll(String sortFieldName, String sortOrder) {
 		if (sortFieldName != null) {
-			Sort sort = new Sort(Direction.fromStringOrNull(sortOrder), sortFieldName);
+			Sort sort = new Sort(Direction.fromOptionalString(sortOrder).orElse(null), sortFieldName);
 			return repository.findAll(sort);
 		} else {
 			return repository.findAll();
@@ -56,7 +56,7 @@ public class RepositoryAdapter<T> implements CrudOperations<T> {
 	public List<T> findEntries(Integer firstResult, Integer maxResults, String sortFieldName, String sortOrder) {
 		Sort sort = null;
 		if (sortFieldName != null) {
-			sort = new Sort(Direction.fromStringOrNull(sortOrder), sortFieldName);
+			sort = new Sort(Direction.fromOptionalString(sortOrder).orElse(null), sortFieldName);
 		}
 
 		Pageable pageable = new PageRequest(firstResult / maxResults, maxResults, sort);
