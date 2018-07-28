@@ -9,6 +9,10 @@ env:
   - PROFILES=jdt
   - PROFILES=javac,el3
   - PROFILES=jdt,el3
+  - PROFILES=javac,java9
+  - PROFILES=jdt,java9
+  - PROFILES=javac,el3,java9
+  - PROFILES=jdt,el3,java9
 #TODO: Try again with next tycho release / JDK 11 release
 matrix:
   exclude:
@@ -16,5 +20,13 @@ matrix:
       env: PROFILES=jdt
     - jdk: oraclejdk11
       env: PROFILES=jdt,el3
+    - jdk: oraclejdk8
+      env: PROFILES=jdt,el3
+    - jdk: oraclejdk8
+      env: PROFILES=jdt,java9
+    - jdk: oraclejdk8
+      env: PROFILES=javac,el3,java9
+    - jdk: oraclejdk8
+      env: PROFILES=jdt,el3,java9
 
 script: "mvn clean install -P ${PROFILES}"
