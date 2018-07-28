@@ -13,13 +13,19 @@ env:
   - PROFILES=jdt,java9
   - PROFILES=javac,el3,java9
   - PROFILES=jdt,el3,java9
-#TODO: Try again with next tycho release / JDK 11 release
+
 matrix:
   exclude:
+      #TODO: Try again with next tycho release / JDK 11 release
     - jdk: oraclejdk11
       env: PROFILES=jdt
     - jdk: oraclejdk11
       env: PROFILES=jdt,el3
+    - jdk: oraclejdk11
+      env: PROFILES=jdt,java9
+    - jdk: oraclejdk11
+      env: PROFILES=jdt,el3,java9
+
     - jdk: oraclejdk8
       env: PROFILES=javac,java9
     - jdk: oraclejdk8
