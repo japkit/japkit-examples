@@ -21,7 +21,7 @@ matrix:
     - jdk: oraclejdk11
       env: PROFILES=jdt,el3
     - jdk: oraclejdk8
-      env: PROFILES=jdt,el3
+      env: PROFILES=javac,java9
     - jdk: oraclejdk8
       env: PROFILES=jdt,java9
     - jdk: oraclejdk8
