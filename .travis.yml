@@ -10,5 +10,11 @@ env:
     - PROFILES=jdt
     - PROFILES=javac,el3
     - PROFILES=jdt,el3
-    
+#TODO: Try again with next tycho release / JDK 11 release
+exclude:
+  - jdk: oraclejdk11
+    env: PROFILES=jdt
+  - jdk: oraclejdk11
+    env: PROFILES=jdt
+
 script: "mvn clean install -P ${PROFILES}"
