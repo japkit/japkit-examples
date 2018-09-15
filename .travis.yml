@@ -16,15 +16,6 @@ env:
 
 matrix:
   exclude:
-      #TODO: Try again with next tycho release / JDK 11 release
-    - jdk: oraclejdk11
-      env: PROFILES=jdt
-    - jdk: oraclejdk11
-      env: PROFILES=jdt,el3
-    - jdk: oraclejdk11
-      env: PROFILES=jdt,java9
-    - jdk: oraclejdk11
-      env: PROFILES=jdt,el3,java9
 
     - jdk: oraclejdk8
       env: PROFILES=javac,java9
