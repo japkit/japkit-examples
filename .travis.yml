@@ -29,5 +29,5 @@ matrix:
     - jdk: oraclejdk8
       env: PROFILES=jdt,el3,java9
 
-install: "mvn help:effective-pom"
+install: "mvn help:effective-pom help:effective-settings"
 script: "mvn clean install -U -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
