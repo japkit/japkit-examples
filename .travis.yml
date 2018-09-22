@@ -30,4 +30,4 @@ matrix:
       env: PROFILES=jdt,el3,java9
 
 install: true
-script: "mvn clean install -U -P ${PROFILES},!standard-with-extra-repos -Dmaven.javadoc.skip=true"
+script: "mvn clean install -U -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
