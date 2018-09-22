@@ -29,4 +29,4 @@ matrix:
     - jdk: oraclejdk8
       env: PROFILES=jdt,el3,java9
 
-script: "mvn clean install -P ${PROFILES}"
+script: "mvn clean install -P ${PROFILES},!standard-with-extra-repos"
