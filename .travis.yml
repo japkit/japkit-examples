@@ -33,4 +33,4 @@ matrix:
 #  - rm "${JAVA_HOME}/lib/security/cacerts"
 #  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
 install: "mvn help:active-profiles help:effective-pom help:effective-settings -P ${PROFILES},-standard-with-extra-repos"
-script: "mvn clean install -U -X -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
+script: "mvn clean install -U -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
