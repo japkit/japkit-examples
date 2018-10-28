@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -227,12 +228,28 @@
 								<artifactId>tycho-compiler-jdt</artifactId>
 								<version>1.3.0-SNAPSHOT</version>
 							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>ecj</artifactId>
+								<version>3.16.0.v20181023-1015</version>
+							</dependency>
 						</dependencies>
 					</plugin>
 				</plugins>
 			</build>
 
 			<pluginRepositories>
+				<pluginRepository>
+					<id>eclipse-staging</id>
+					<url>https://repo.eclipse.org/content/repositories/eclipse-staging/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+
 				<pluginRepository>
 					<id>tycho-snapshots</id>
 					<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>
@@ -247,7 +264,8 @@
 						<enabled>true</enabled>
 					</snapshots>
 				</pluginRepository>
-				<!-- Workaround for timeouts. The repo comes from maven-compiler-plugin itself (or some of its parent POMs) -->
+				<!-- Workaround for timeouts. The repo comes from maven-compiler-plugin 
+					itself (or some of its parent POMs) -->
 				<pluginRepository>
 					<id>apache.snapshots</id>
 					<url>https://repository.apache.org/content/repositories/snapshots</url>
