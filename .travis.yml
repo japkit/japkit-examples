@@ -3,7 +3,7 @@ cache:
   directories:
   - $HOME/.m2
 jdk:
-  - oraclejdk8
+  - openjdk8
   - oraclejdk9
 #  - openjdk10
   - oraclejdk11
@@ -20,13 +20,13 @@ env:
 matrix:
   exclude:
 
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=javac,java9
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=jdt,java9
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=javac,el3,java9
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=jdt,el3,java9
 # TODO: Nur für openjdk
 # before_install:
