@@ -3,10 +3,8 @@ cache:
   directories:
   - $HOME/.m2
 jdk:
-  - oraclejdk8
-  - oraclejdk9
-#  - openjdk10
-  - oraclejdk11
+  - openjdk8
+  - openjdk11
 env:
   - PROFILES=javac
   - PROFILES=jdt
@@ -20,17 +18,17 @@ env:
 matrix:
   exclude:
 
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=javac,java9
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=jdt,java9
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=javac,el3,java9
-    - jdk: oraclejdk8
+    - jdk: openjdk8
       env: PROFILES=jdt,el3,java9
 # TODO: Nur für openjdk
 # before_install:
 #  - rm "${JAVA_HOME}/lib/security/cacerts"
 #  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-install: "mvn help:active-profiles help:effective-pom help:effective-settings -P ${PROFILES},-standard-with-extra-repos"
-script: "mvn clean install -U -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
+install: "mvn help:active-profiles help:effective-pom help:effective-settings -q -P ${PROFILES},-standard-with-extra-repos"
+script: "mvn clean install -U -q -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
