@@ -166,6 +166,14 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>java11</id>
+			<activation></activation>
+			<properties>
+				<maven.compiler.source>11</maven.compiler.source>
+				<maven.compiler.target>11</maven.compiler.target>
+			</properties>
+		</profile>
+		<profile>
 			<id>release-sign-artifacts</id>
 			<activation>
 				<property>
