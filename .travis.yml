@@ -13,7 +13,7 @@ env:
   - PROFILES=jdt,el3
   - PROFILES=javac,java11
   - PROFILES=jdt,java11
-  - PROFILES=javac,el3,jav11
+  - PROFILES=javac,el3,java11
   - PROFILES=jdt,el3,java11
 
 matrix:
