@@ -11,25 +11,21 @@ env:
   - PROFILES=jdt
   - PROFILES=javac,el3
   - PROFILES=jdt,el3
-  - PROFILES=javac,java9
-  - PROFILES=jdt,java9
-  - PROFILES=javac,el3,java9
-  - PROFILES=jdt,el3,java9
+  - PROFILES=javac,java11
+  - PROFILES=jdt,java11
+  - PROFILES=javac,el3,jav11
+  - PROFILES=jdt,el3,java11
 
 matrix:
   exclude:
 
     - jdk: openjdk8
-      env: PROFILES=javac,java9
+      env: PROFILES=javac,java11
     - jdk: openjdk8
-      env: PROFILES=jdt,java9
+      env: PROFILES=jdt,java11
     - jdk: openjdk8
-      env: PROFILES=javac,el3,java9
+      env: PROFILES=javac,el3,java11
     - jdk: openjdk8
-      env: PROFILES=jdt,el3,java9
-# TODO: Nur für openjdk
-# before_install:
-#  - rm "${JAVA_HOME}/lib/security/cacerts"
-#  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+      env: PROFILES=jdt,el3,java11
 install: "mvn help:active-profiles help:effective-pom help:effective-settings -q -P ${PROFILES},-standard-with-extra-repos"
 script: "mvn clean install -U -q -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
