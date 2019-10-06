@@ -38,7 +38,7 @@ public class EntityConverterUtil {
 	public static <E> Converter<String, E> getStringToEntityConverter(final CrudOperations<E> crudOperations) {
 		return new Converter<String, E>() {
 			public E convert(String id) {
-				return crudOperations.find(new Long(id));
+				return crudOperations.find(Long.valueOf(id));
 			}
 		};
 	}

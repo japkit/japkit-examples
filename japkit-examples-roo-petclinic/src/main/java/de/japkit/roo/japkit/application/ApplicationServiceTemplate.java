@@ -29,7 +29,6 @@ import de.japkit.metaannotations.Template;
 import de.japkit.metaannotations.TemplateCall;
 import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.BehaviorInnerClassWithGenClassPrefix;
-import de.japkit.metaannotations.classselectors.ClassSelector;
 import de.japkit.roo.japkit.CommonLibrary.type;
 import de.japkit.roo.japkit.domain.DomainLibrary;
 import de.japkit.roo.japkit.domain.DomainLibrary.findIdProperty;

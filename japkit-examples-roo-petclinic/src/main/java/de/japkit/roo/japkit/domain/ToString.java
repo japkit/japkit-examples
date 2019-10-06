@@ -4,10 +4,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import de.japkit.metaannotations.Case;
-import de.japkit.metaannotations.Matcher;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Template;
-import de.japkit.metaannotations.TypeCategory;
 import de.japkit.metaannotations.Var;
 
 @Template(vars = @Var(name = "toStringProperties", expr="#{genClass.properties}"))
