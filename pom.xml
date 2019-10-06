@@ -201,15 +201,6 @@
 			</build>
 		</profile>
 
-		<profile>
-			<id>el3</id>
-			<activation>
-			</activation>
-			<properties>
-				<japkit.all.artifact>japkit-all-javael3</japkit.all.artifact>
-			</properties>
-		</profile>
-
 		<!-- Build with Eclipse JDT Compiler. -->
 		<profile>
 			<id>jdt</id>
