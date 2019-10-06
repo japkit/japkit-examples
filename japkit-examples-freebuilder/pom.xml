@@ -20,6 +20,9 @@
 						<compilerArg>
 							-Aannotations=de.japkit.examples.freebuilder.*
 						</compilerArg>
+						<compilerArg>
+							-AdiagnosticMessages=false
+						</compilerArg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
