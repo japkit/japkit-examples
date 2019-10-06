@@ -28,4 +28,4 @@ matrix:
     - jdk: openjdk8
       env: PROFILES=jdt,el3,java11
 install: "mvn help:active-profiles help:effective-pom help:effective-settings -q -P ${PROFILES},-standard-with-extra-repos"
-script: "mvn clean install -U -q -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
+script: "mvn clean install -U  -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
