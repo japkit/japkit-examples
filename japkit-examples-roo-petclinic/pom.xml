@@ -19,7 +19,7 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<japkit.version>1.22-SNAPSHOT</japkit.version>
+		<japkit.version>1.23-SNAPSHOT</japkit.version>
 		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
 		<!-- EL3 and Groovy -->
 		<japkit.all.artifact>japkit-all-javael3</japkit.all.artifact>
