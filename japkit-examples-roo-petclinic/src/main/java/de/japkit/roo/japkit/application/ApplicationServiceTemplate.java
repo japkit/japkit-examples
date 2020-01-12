@@ -36,8 +36,8 @@ import de.japkit.roo.japkit.domain.DomainLibrary.isEntity;
 import de.japkit.roo.japkit.domain.DomainLibrary.isVO;
 
 @RuntimeMetadata
+@Clazz(nameSuffixToRemove = "Def", nameSuffixToAppend = "")
 @Service
-@Template()
 public class ApplicationServiceTemplate {
 
 	@Template(
@@ -122,14 +122,14 @@ public class ApplicationServiceTemplate {
 			@Clazz(nameExpr = "#{method.simpleName.toFirstUpper}Command", behaviorClass = BehaviorInnerClassWithGenClassPrefix.class)
 			@Function(expr = "#{command.asType()}")
 			@ResultVar("command")
-			@Template(
-				fieldDefaults = @Field(getter = @Getter, setter = @Setter),
-				allFieldsAreTemplates = true,
-				templates = @TemplateCall(value = CommandFieldTemplate.class, src = "#{src.parameters}"))
+			@Template(fieldDefaults = @Field(getter = @Getter, setter = @Setter))
 			public class Command {
-				Long id; // TODO: GUID instead of DB ID !
+				private Long id; // TODO: GUID instead of DB ID !
 
-				Long version;
+				private Long version;
+
+				@TemplateCall(src = "#{src.parameters}")
+				CommandFieldTemplate commandFields;
 			};
 
 			/**
@@ -159,10 +159,10 @@ public class ApplicationServiceTemplate {
 			@Clazz(nameExpr = "Create#{aggregateName}Command")
 			@Function(expr = "#{command.asType()}")
 			@ResultVar("command")
-			@Template(
-				fieldDefaults = @Field(getter = @Getter, setter = @Setter),
-				templates = { @TemplateCall(value = CommandFieldTemplate.class, src = "#{src.parameters}"), })
+			@Template(fieldDefaults = @Field(getter = @Getter, setter = @Setter))
 			public class CreateCommand {
+				@TemplateCall(src = "#{src.parameters}")
+				CommandFieldTemplate commandFields;
 			};
 
 			/**
@@ -218,15 +218,12 @@ public class ApplicationServiceTemplate {
 	public static class CommandFieldTemplate {
 
 		@Order(1)
-		@Clazz(
-			condFun = isVO.class,
-			src = "#{fieldType.asElement}",
-			srcVar = "vo",
-			nameExpr = "#{vo.simpleName}DTO",
-			templates = { @TemplateCall(value = CommandFieldTemplate.class, src = "#{vo.properties}") })
+		@Clazz(condFun = isVO.class, src = "#{fieldType.asElement}", srcVar = "vo", nameExpr = "#{vo.simpleName}DTO")
 		@ResultVar("dtoClass")
 		@DTO
 		public class DTOClass {
+			@TemplateCall(src = "#{vo.properties}")
+			CommandFieldTemplate commandFields;
 		}
 
 		@Switch({

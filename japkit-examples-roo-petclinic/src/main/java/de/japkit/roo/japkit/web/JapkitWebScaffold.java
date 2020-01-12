@@ -69,9 +69,7 @@ import de.japkit.roo.japkit.web.WebScaffoldLibrary.viewableProperties;
 
 	modifiers = Modifier.PUBLIC,
 	customBehaviorCond = "#{triggerAnnotation.customBehavior}",
-	templates = {
-		@TemplateCall(ControllerMembers.class), @TemplateCall(ControllerMembersJpaRepository.class),
-		@TemplateCall(ControllerFormatterMembers.class) })
+	templates = @TemplateCall(ControllerTemplate.class))
 @ResourceTemplate.List({
 	@ResourceTemplate(
 		src = "#{createCommands.get(0)}",

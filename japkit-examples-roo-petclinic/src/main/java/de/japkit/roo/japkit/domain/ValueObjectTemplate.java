@@ -16,6 +16,7 @@ import de.japkit.annotations.RuntimeMetadata;
 import de.japkit.functions.SrcType;
 import de.japkit.metaannotations.Annotation;
 import de.japkit.metaannotations.Case;
+import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.CodeFragment;
 import de.japkit.metaannotations.Constructor;
 import de.japkit.metaannotations.Field;
@@ -25,16 +26,20 @@ import de.japkit.metaannotations.InnerClass;
 import de.japkit.metaannotations.Matcher;
 import de.japkit.metaannotations.Method;
 import de.japkit.metaannotations.Setter;
-import de.japkit.metaannotations.Template;
+import de.japkit.metaannotations.TemplateCall;
 import de.japkit.metaannotations.Var;
 import de.japkit.metaannotations.classselectors.ClassSelector;
 import de.japkit.metaannotations.classselectors.ClassSelectorKind;
 import de.japkit.metaannotations.classselectors.GeneratedClass;
 
 @RuntimeMetadata
-@Template(vars = @Var(name = "properties", expr = "#{src.declaredFields}"))
+@Clazz(nameSuffixToRemove = "Def", nameSuffixToAppend = "", modifiers = { Modifier.PUBLIC, Modifier.FINAL })
 @Embeddable
 public abstract class ValueObjectTemplate {
+	@Var(expr = "#{src.declaredFields}")
+	class properties {
+	};
+
 	@Matcher(annotations = NotNull.class)
 	class mandatory {
 	};
@@ -116,5 +121,8 @@ public abstract class ValueObjectTemplate {
 	@ParamNames("builder")
 	private ValueObjectTemplate(Builder builder) {
 	}
+
+	@TemplateCall
+	ToString toString;
 
 }
