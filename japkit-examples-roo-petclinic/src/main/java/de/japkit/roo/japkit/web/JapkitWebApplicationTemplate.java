@@ -12,7 +12,8 @@ import de.japkit.roo.base.web.WebMvcConfig;
 @SpringBootApplication
 @Import(WebMvcConfig.class)
 public class JapkitWebApplicationTemplate {
-	
-	@Method(imports=SpringApplication.class, bodyCode="SpringApplication.run(#{genClass.asType().code}.class, args);")
-	public static void main(String[] args) {}
+
+	@Method(imports = SpringApplication.class, bodyCode = "SpringApplication.run(#{genClass.asType().code}.class, args);")
+	public static void main(String[] args) {
+	}
 }

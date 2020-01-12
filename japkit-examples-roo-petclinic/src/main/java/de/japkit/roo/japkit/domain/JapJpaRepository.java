@@ -12,11 +12,17 @@ import de.japkit.metaannotations.Clazz;
 import de.japkit.metaannotations.Trigger;
 import de.japkit.roo.japkit.Layers;
 
-@Trigger(layer=Layers.REPOSITORIES)
-@Clazz(nameSuffixToRemove = "RepositoryDef", nameSuffixToAppend = "Repository", modifiers = Modifier.PUBLIC,
-		kind = ElementKind.INTERFACE, interface1 = JpaRepository.class, interface1Args = { DomainType.class, Long.class },
-		interface2 = JpaSpecificationExecutor.class, interface2Args = DomainType.class, annotations = @Annotation(
-				targetAnnotation = Repository.class))
+@Trigger(layer = Layers.REPOSITORIES)
+@Clazz(
+	nameSuffixToRemove = "RepositoryDef",
+	nameSuffixToAppend = "Repository",
+	modifiers = Modifier.PUBLIC,
+	kind = ElementKind.INTERFACE,
+	interface1 = JpaRepository.class,
+	interface1Args = { DomainType.class, Long.class },
+	interface2 = JpaSpecificationExecutor.class,
+	interface2Args = DomainType.class,
+	annotations = @Annotation(targetAnnotation = Repository.class))
 public @interface JapJpaRepository {
 	boolean shadow() default false;
 

@@ -12,9 +12,9 @@ public class VetViewModelDef {
 	@TableColumn
 	String firstName;
 
-	//Override and add some annotations
+	// Override and add some annotations
 	@Size(max = 10, min = 3)
-	@Pattern(regexp="[a-zA-Z]+")
+	@Pattern(regexp = "[a-zA-Z]+")
 	//
 	@TableColumn
 	String lastName;

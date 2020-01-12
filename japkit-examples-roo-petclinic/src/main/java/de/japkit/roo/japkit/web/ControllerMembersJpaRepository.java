@@ -22,40 +22,39 @@ import de.japkit.roo.japkit.domain.DomainLibrary.isEntity;
 import de.japkit.roo.japkit.web.JapkitWebScaffold.Repository;
 
 @RuntimeMetadata
-@Template(libraries=CommonLibrary.class)
+@Template(libraries = CommonLibrary.class)
 public abstract class ControllerMembersJpaRepository {
-	
+
 	@Field
 	@Autowired
 	private Repository repository;
-	
+
 	@Var(expr = "#{viewProperties}", filterFun = isEntity.class)
-	class entityProperties{}
-	
-	@Template(srcFun=entityProperties.class, srcGroupByFun={SrcSingleValueType.class, findRepository.class} ) 
-	abstract class RelatedEntityMembers{
-		
-		@Var(fun={SrcKey.class, nameFirstLower.class})
-		class repositoryFieldName {}
-		
+	class entityProperties {
+	}
+
+	@Template(srcFun = entityProperties.class, srcGroupByFun = { SrcSingleValueType.class, findRepository.class })
+	abstract class RelatedEntityMembers {
+
+		@Var(fun = { SrcKey.class, nameFirstLower.class })
+		class repositoryFieldName {
+		}
+
 		@Field
 		@Autowired
 		private SrcKey $repositoryFieldName$;
-		
-		
-		@Method(srcFun=SrcValue.class, bodyCode = "return #{repositoryFieldName}.findAll();")
+
+		@Method(srcFun = SrcValue.class, bodyCode = "return #{repositoryFieldName}.findAll();")
 		protected abstract List<SrcSingleValueType> get$srcElementName$Choices();
 	}
 
-	@Method(imports = RepositoryAdapter.class,
-			bodyCode = "return new RepositoryAdapter<#{fbo.code}>(repository);")
+	@Method(imports = RepositoryAdapter.class, bodyCode = "return new RepositoryAdapter<#{fbo.code}>(repository);")
 	protected abstract CrudOperations<FormBackingObject> crudOperations();
 
 	/**
 	 * @japkit.bodyCode <code>uiModel.addAttribute("${src.name}Choices", get${src.name.toFirstUpper}Choices());</code>
 	 */
-	@Method(bodyIterator="entityProperties")
+	@Method(bodyIterator = "entityProperties")
 	abstract void addEntityChoices(Model uiModel);
-	
 
 }

@@ -31,87 +31,104 @@ import de.japkit.roo.japkit.web.WebScaffoldLibrary.toHtmlId;
 import de.japkit.roo.japkit.web.WebScaffoldLibrary.viewableProperties;
 
 @RuntimeMetadata
-@Trigger(layer=Layers.CONTROLLERS, 
-	libraries={DomainLibrary.class, ApplicationServiceLibrary.class, WebScaffoldLibrary.class},
-	vars={
+@Trigger(
+	layer = Layers.CONTROLLERS,
+	libraries = { DomainLibrary.class, ApplicationServiceLibrary.class, WebScaffoldLibrary.class },
+	vars = {
 		@Var(name = "fbo", expr = "#{formBackingObject}"),
-		@Var(name = "fboName", type = String.class, ifEmpty=true, expr = "#{fbo.simpleName.toString()}"),
-		@Var(name = "fboPluralName", type = String.class, ifEmpty=true, expr = "#{fboName}s"),
-		@Var(name = "path", type = String.class, ifEmpty=true, expr = "#{fboPluralName.toLowerCase()}"),
-		@Var(name = "modelAttribute", type = String.class, ifEmpty=true, expr = "#{fboName.toFirstLower}"),
-		
+		@Var(name = "fboName", type = String.class, ifEmpty = true, expr = "#{fbo.simpleName.toString()}"),
+		@Var(name = "fboPluralName", type = String.class, ifEmpty = true, expr = "#{fboName}s"),
+		@Var(name = "path", type = String.class, ifEmpty = true, expr = "#{fboPluralName.toLowerCase()}"),
+		@Var(name = "modelAttribute", type = String.class, ifEmpty = true, expr = "#{fboName.toFirstLower}"),
+
 		// For making IDs in JSPs unique
-		@Var(name = "fboFqnId", expr = "#{fbo.qualifiedName}", fun=toHtmlId.class),	
+		@Var(name = "fboFqnId", expr = "#{fbo.qualifiedName}", fun = toHtmlId.class),
 		@Var(name = "fboShortId", expr = "#{fboName.toLowerCase()}"),
 
-		@Var(name = "viewModel", expr="#{fbo}", fun=findViewModel.class, nullable=true),
-		
+		@Var(name = "viewModel", expr = "#{fbo}", fun = findViewModel.class, nullable = true),
+
 		// The properties to show
-		@Var(name = "viewProperties", expr="#{viewModel != null ? viewModel : fbo}", fun=viewableProperties.class),
+		@Var(name = "viewProperties", expr = "#{viewModel != null ? viewModel : fbo}", fun = viewableProperties.class),
 		@Var(name = "datetimeProperties", expr = "#{viewProperties}", filterFun = isDatetime.class),
 		@Var(name = "enumProperties", expr = "#{viewProperties}", filterFun = isEnum.class),
 
-		
 		@Var(name = "explicitTableProperties", expr = "#{viewProperties}", filterFun = isTableColumn.class),
 		@Var(name = "tableProperties", expr = "#{explicitTableProperties.isEmpty() ? viewProperties : explicitTableProperties}"),
-				
-		@Var(name = "applicationService", expr="#{fbo}", fun=findApplicationService.class),
 
-		@Var(name="createCommands", expr="#{applicationService}", fun=findCreateCommandMethods.class),
-		@Var(name="updateCommands", expr="#{applicationService}", fun=findUpdateCommandMethods.class),
-		@Var(name = "propertyNames", ifEmpty=true, expr="#{viewProperties}", fun=allPropertyNames.class)		
+		@Var(name = "applicationService", expr = "#{fbo}", fun = findApplicationService.class),
 
-})
+		@Var(name = "createCommands", expr = "#{applicationService}", fun = findCreateCommandMethods.class),
+		@Var(name = "updateCommands", expr = "#{applicationService}", fun = findUpdateCommandMethods.class),
+		@Var(name = "propertyNames", ifEmpty = true, expr = "#{viewProperties}", fun = allPropertyNames.class)
+
+	})
 @Clazz(
-		nameSuffixToRemove = "Def",
-		nameSuffixToAppend = "",
-		//superclassTypeArgs=FormBackingObject.class,
-		
-		modifiers = Modifier.PUBLIC,
-		customBehaviorCond="#{triggerAnnotation.customBehavior}",
-		templates = {
-				@TemplateCall(ControllerMembers.class),
-				@TemplateCall(ControllerMembersJpaRepository.class) ,
-				@TemplateCall(ControllerFormatterMembers.class)
-				})
+	nameSuffixToRemove = "Def",
+	nameSuffixToAppend = "",
+	// superclassTypeArgs=FormBackingObject.class,
+
+	modifiers = Modifier.PUBLIC,
+	customBehaviorCond = "#{triggerAnnotation.customBehavior}",
+	templates = {
+		@TemplateCall(ControllerMembers.class), @TemplateCall(ControllerMembersJpaRepository.class),
+		@TemplateCall(ControllerFormatterMembers.class) })
 @ResourceTemplate.List({
-		@ResourceTemplate(src="#{createCommands.get(0)}", srcVar="cmdMethod", 
-				templateLang = GSTRING_TEMPLATE, templateName = "createOrUpdate.jspx", pathExpr = "views/#{path}",
-				nameExpr = "create.jspx", location = ResourceLocation.WEBINF, 
-				vars ={ @Var(name = "update", expr = "#{false}"), 
-					@Var(name="command", expr="#{cmdMethod.command()}"),
-					@Var(name="modelAttribute", expr="#{command.simpleName.toFirstLower}"),
-					@Var(name = "viewProperties", expr="#{command.properties}"),
-				}),
-		@ResourceTemplate(src="#{createCommands}", srcVar="cmdMethod",
-				templateLang = GSTRING_TEMPLATE, templateName = "command_i18n.jspx", pathExpr = "i18n/#{path}",
-				nameExpr = "#{cmdMethod.simpleName}.properties", location = ResourceLocation.WEBINF, 
-				vars = {
-					@Var(name="command", expr="#{cmdMethod.command()}"),
-					@Var(name="cmdName", expr="#{cmdMethod.simpleName}"),
-					@Var(name = "cmdPropertyNames", expr="#{allPropertyNames(command.properties)}"),
-				}),
-		@ResourceTemplate(src="#{updateCommands}", srcVar="cmdMethod",
-				templateLang = GSTRING_TEMPLATE, templateName = "createOrUpdate.jspx", pathExpr = "views/#{path}",
-				nameExpr = "#{cmdMethod.simpleName.toFirstLower}.jspx", location = ResourceLocation.WEBINF, 
-				vars = {
-					@Var(name = "update", expr = "#{true}"),
-					@Var(name="command", expr="#{cmdMethod.command()}"),
-					@Var(name="modelAttribute", expr="#{command.simpleName.toFirstLower}"),
-					@Var(name = "viewProperties", expr="#{command.properties}"),
-				}),
-		@ResourceTemplate(src="#{updateCommands}", srcVar="cmdMethod",
-				templateLang = GSTRING_TEMPLATE, templateName = "command_i18n.jspx", pathExpr = "i18n/#{path}",
-				nameExpr = "#{cmdMethod.simpleName}.properties", location = ResourceLocation.WEBINF, 
-				vars = {
-					@Var(name="command", expr="#{cmdMethod.command()}"),
-					@Var(name="cmdName", expr="#{cmdMethod.simpleName}"),
-					@Var(name = "cmdPropertyNames", expr="#{allPropertyNames(command.properties)}"),
-				}),
-		@ResourceTemplate(templateLang = GSTRING_TEMPLATE, templateName = "show.jspx", location = ResourceLocation.WEBINF,
-				pathExpr = "views/#{path}"),
-		@ResourceTemplate(templateLang = GSTRING_TEMPLATE, templateName = "list.jspx", location = ResourceLocation.WEBINF,
-				pathExpr = "views/#{path}") })
+	@ResourceTemplate(
+		src = "#{createCommands.get(0)}",
+		srcVar = "cmdMethod",
+		templateLang = GSTRING_TEMPLATE,
+		templateName = "createOrUpdate.jspx",
+		pathExpr = "views/#{path}",
+		nameExpr = "create.jspx",
+		location = ResourceLocation.WEBINF,
+		vars = {
+			@Var(name = "update", expr = "#{false}"), @Var(name = "command", expr = "#{cmdMethod.command()}"),
+			@Var(name = "modelAttribute", expr = "#{command.simpleName.toFirstLower}"),
+			@Var(name = "viewProperties", expr = "#{command.properties}"), }),
+	@ResourceTemplate(
+		src = "#{createCommands}",
+		srcVar = "cmdMethod",
+		templateLang = GSTRING_TEMPLATE,
+		templateName = "command_i18n.jspx",
+		pathExpr = "i18n/#{path}",
+		nameExpr = "#{cmdMethod.simpleName}.properties",
+		location = ResourceLocation.WEBINF,
+		vars = {
+			@Var(name = "command", expr = "#{cmdMethod.command()}"), @Var(name = "cmdName", expr = "#{cmdMethod.simpleName}"),
+			@Var(name = "cmdPropertyNames", expr = "#{allPropertyNames(command.properties)}"), }),
+	@ResourceTemplate(
+		src = "#{updateCommands}",
+		srcVar = "cmdMethod",
+		templateLang = GSTRING_TEMPLATE,
+		templateName = "createOrUpdate.jspx",
+		pathExpr = "views/#{path}",
+		nameExpr = "#{cmdMethod.simpleName.toFirstLower}.jspx",
+		location = ResourceLocation.WEBINF,
+		vars = {
+			@Var(name = "update", expr = "#{true}"), @Var(name = "command", expr = "#{cmdMethod.command()}"),
+			@Var(name = "modelAttribute", expr = "#{command.simpleName.toFirstLower}"),
+			@Var(name = "viewProperties", expr = "#{command.properties}"), }),
+	@ResourceTemplate(
+		src = "#{updateCommands}",
+		srcVar = "cmdMethod",
+		templateLang = GSTRING_TEMPLATE,
+		templateName = "command_i18n.jspx",
+		pathExpr = "i18n/#{path}",
+		nameExpr = "#{cmdMethod.simpleName}.properties",
+		location = ResourceLocation.WEBINF,
+		vars = {
+			@Var(name = "command", expr = "#{cmdMethod.command()}"), @Var(name = "cmdName", expr = "#{cmdMethod.simpleName}"),
+			@Var(name = "cmdPropertyNames", expr = "#{allPropertyNames(command.properties)}"), }),
+	@ResourceTemplate(
+		templateLang = GSTRING_TEMPLATE,
+		templateName = "show.jspx",
+		location = ResourceLocation.WEBINF,
+		pathExpr = "views/#{path}"),
+	@ResourceTemplate(
+		templateLang = GSTRING_TEMPLATE,
+		templateName = "list.jspx",
+		location = ResourceLocation.WEBINF,
+		pathExpr = "views/#{path}") })
 public @interface JapkitWebScaffold {
 
 	boolean shadow() default false;
@@ -121,7 +138,7 @@ public @interface JapkitWebScaffold {
 	 * form backing object defined here class will be exposed in a RESTful way.
 	 */
 	Class<?> formBackingObject();
-	
+
 	Class<?>[] viewModel() default {};
 
 	/**
@@ -137,23 +154,23 @@ public @interface JapkitWebScaffold {
 	boolean customBehavior() default false;
 
 	/**
-	 * 
 	 * @return the name of the model attribute for the formBackingObject. By
 	 *         default, the class name with first lower case.
 	 */
 	String modelAttribute() default "";
-		
+
 	@SuppressWarnings("rawtypes")
 	@SingleValue
 	Class<? extends JpaRepository>[] repository() default {};
-	
-	@Var(type = TypeMirror.class, ifEmpty = true, expr="#{fbo}", fun=findRepository.class)	
-	class Repository{};
+
+	@Var(type = TypeMirror.class, ifEmpty = true, expr = "#{fbo}", fun = findRepository.class)
+	class Repository {
+	};
 
 	@SingleValue
 	Class<?>[] applicationService() default {};
+
 	/**
-	 * 
 	 * @return the unique id for the fbo class used in JSPs and i18n
 	 */
 	String fboFqnId() default "";
@@ -166,6 +183,5 @@ public @interface JapkitWebScaffold {
 
 	// For i18n. TODO: Reconsider
 	String[] propertyNames() default {};
-	
-	
+
 }

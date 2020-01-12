@@ -14,23 +14,28 @@ import de.japkit.annotations.Order;
 import de.japkit.roo.japkit.domain.JapkitEntity;
 import de.japkit.roo.petclinic.domain.Vet.AbstractBehavior;
 
-@JapkitEntity(customBehavior=true/*createCommandProperties={VetProperties.Specialty_.class , VetProperties.FirstName_.class, VetProperties.LastName_.class}*/)
-public class VetDef extends AbstractPersonDef {	
-	
+@JapkitEntity(
+	customBehavior = true/*
+							 * createCommandProperties={VetProperties.Specialty_
+							 * .class , VetProperties.FirstName_.class,
+							 * VetProperties.LastName_.class}
+							 */)
+public class VetDef extends AbstractPersonDef {
+
 	public static class Behavior extends AbstractBehavior {
 
 		protected Behavior(VetInternal internal) {
 			super(internal);
 		}
-		
-		public void rateVet(int rating){
-			
+
+		public void rateVet(int rating) {
+
 		}
 
 	}
 
 	/**
-     */
+	 */
 	@NotNull
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
@@ -39,10 +44,9 @@ public class VetDef extends AbstractPersonDef {
 	Calendar employedSince;
 
 	/**
-     */
+	 */
 	@Enumerated
 	@Order(1)
 	Specialty specialty;
-	
-	
+
 }

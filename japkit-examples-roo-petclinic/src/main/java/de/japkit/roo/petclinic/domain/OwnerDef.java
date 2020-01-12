@@ -7,7 +7,7 @@ public class OwnerDef extends AbstractPersonDef {
 
 	/**
 	 * Avoid bidirectional.
-     */
-	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-	//Set<Pet> pets = new HashSet<Pet>();
+	 */
+	// @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	// Set<Pet> pets = new HashSet<Pet>();
 }

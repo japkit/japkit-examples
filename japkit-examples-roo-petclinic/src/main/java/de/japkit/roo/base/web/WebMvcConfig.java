@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
 @ComponentScan
-public class WebMvcConfig implements WebMvcConfigurer{
+public class WebMvcConfig implements WebMvcConfigurer {
 	/**
 	 * @return tiles configurer
 	 */
@@ -29,14 +29,13 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	}
 
 	/**
-	 *
 	 * @return tiles view resolver
 	 */
 	@Bean
 	public TilesViewResolver tilesViewResolver() {
 		return new TilesViewResolver();
 	}
-	
+
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() throws Exception {
 		ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
@@ -44,41 +43,41 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		ms.setBasenames(resourceBundleNameRegistry().getObject());
 		return ms;
 	}
-	
-	@Bean 
+
+	@Bean
 	public ResourceBundleNameRegistry resourceBundleNameRegistry() {
 		ResourceBundleNameRegistry r = new ResourceBundleNameRegistry();
 		r.setCommon("application,messages");
 		r.setPath("WEB-INF/i18n/");
 		return r;
 	}
-	
+
 	@Bean
-	public ThemeSource themeSource(){
+	public ThemeSource themeSource() {
 		return new ResourceBundleThemeSource();
 	}
-	
+
 	@Bean
-	public ThemeResolver themeResolver(){
+	public ThemeResolver themeResolver() {
 		CookieThemeResolver resolver = new CookieThemeResolver();
 		resolver.setDefaultThemeName("standard");
 		resolver.setCookieName("theme");
 		return resolver;
 	}
-	
+
 	@Bean
-	public Formatters formatters(){
+	public Formatters formatters() {
 		return new Formatters();
-	} 
-	
+	}
+
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		formatters().registerConverters(registry);
 	}
-	
+
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("index");
 	}
-	
+
 }

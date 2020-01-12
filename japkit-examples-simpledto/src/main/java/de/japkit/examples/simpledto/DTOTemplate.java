@@ -12,9 +12,7 @@ import de.japkit.metaannotations.Setter;
 @Clazz(nameSuffixToAppend = "DTO")
 @RuntimeMetadata
 public class DTOTemplate implements SrcInterface {
-	@Field(src = "#{properties}",
-			getter = @Getter,
-			setter = @Setter)
+	@Field(src = "#{properties}", getter = @Getter, setter = @Setter)
 	private SrcType $name$;
 
 	/**
@@ -25,8 +23,7 @@ public class DTOTemplate implements SrcInterface {
 	 * <li>japkit.bodyAfterIteratorCode "}";
 	 * </ul>
 	 */
-	@Method(bodyIterator = "#{properties}",
-			bodyIndentAfterLinebreak = true)
+	@Method(bodyIterator = "#{properties}", bodyIndentAfterLinebreak = true)
 	@Override
 	public String toString() {
 		return null;

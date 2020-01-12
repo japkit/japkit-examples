@@ -18,17 +18,25 @@ import de.japkit.metaannotations.classselectors.ClassSelector;
 import de.japkit.roo.japkit.Layers;
 import de.japkit.roo.japkit.domain.JapkitEntity.SuperclassSelector;
 
-@Trigger(layer=Layers.ENTITIES)
-@Clazz(nameSuffixToRemove = "Def", nameSuffixToAppend = "", modifiers = Modifier.PUBLIC, modifiersFromSrc=true, 
-		customBehaviorCond="#{customBehavior}",
-		annotations = { @Annotation(
-		targetAnnotation = Entity.class) }, superclass = SuperclassSelector.class, templates = { @TemplateCall(IdAndVersion.class), 
-		@TemplateCall(PropertyRefsTemplate.class),
-		@TemplateCall(ToString.class),
-		@TemplateCall(EntityBehaviorMethods.class)},
-		fields = {@Field(src = "#{src.declaredFields}", modifiers=Modifier.PRIVATE, getter = @Getter, setter = @Setter(modifiers=Modifier.PROTECTED), annotations = @Annotation(
-				copyAnnotationsFromPackages = { JPA, JSR303, SPRING_FORMAT } ))	
-				})
+@Trigger(layer = Layers.ENTITIES)
+@Clazz(
+	nameSuffixToRemove = "Def",
+	nameSuffixToAppend = "",
+	modifiers = Modifier.PUBLIC,
+	modifiersFromSrc = true,
+	customBehaviorCond = "#{customBehavior}",
+	annotations = { @Annotation(targetAnnotation = Entity.class) },
+	superclass = SuperclassSelector.class,
+	templates = {
+		@TemplateCall(IdAndVersion.class), @TemplateCall(PropertyRefsTemplate.class), @TemplateCall(ToString.class),
+		@TemplateCall(EntityBehaviorMethods.class) },
+	fields = {
+		@Field(
+			src = "#{src.declaredFields}",
+			modifiers = Modifier.PRIVATE,
+			getter = @Getter,
+			setter = @Setter(modifiers = Modifier.PROTECTED),
+			annotations = @Annotation(copyAnnotationsFromPackages = { JPA, JSR303, SPRING_FORMAT })) })
 
 public @interface JapkitEntity {
 	// Modifier[] modifier() default {};
@@ -37,12 +45,12 @@ public @interface JapkitEntity {
 
 	boolean customBehavior() default false;
 
-	@ClassSelector(expr = "#{annotatedClass.superclass}", requiredTriggerAnnotation=JapkitEntity.class)
+	@ClassSelector(expr = "#{annotatedClass.superclass}", requiredTriggerAnnotation = JapkitEntity.class)
 	static class SuperclassSelector {
 	};
-	
+
 	String[] createCommandProperties() default {};
-	
+
 	String[] updateCommandProperties() default {};
 
 }

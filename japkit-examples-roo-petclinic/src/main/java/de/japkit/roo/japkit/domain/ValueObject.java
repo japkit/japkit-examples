@@ -12,8 +12,11 @@ import de.japkit.roo.japkit.Layers;
 
 @Trigger(layer = Layers.VALUE_OBJECTS)
 @Target(ElementType.TYPE)
-@Clazz(nameSuffixToRemove = "Def", nameSuffixToAppend = "", modifiers = { Modifier.PUBLIC, Modifier.FINAL }, templates = {
-		@TemplateCall(ValueObjectTemplate.class), @TemplateCall(ToString.class) })
+@Clazz(
+	nameSuffixToRemove = "Def",
+	nameSuffixToAppend = "",
+	modifiers = { Modifier.PUBLIC, Modifier.FINAL },
+	templates = { @TemplateCall(ValueObjectTemplate.class), @TemplateCall(ToString.class) })
 public @interface ValueObject {
 	boolean shadow() default false;
 

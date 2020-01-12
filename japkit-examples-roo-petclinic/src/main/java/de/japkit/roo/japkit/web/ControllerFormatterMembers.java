@@ -11,24 +11,23 @@ import de.japkit.roo.base.web.LabelProvider;
 
 @Template
 public abstract class ControllerFormatterMembers implements FormatterRegistrar, LabelProvider<FormBackingObject> {
-	
 
-		@Method(imports={EntityConverterUtil.class} ,
-				bodyCode="EntityConverterUtil.registerConverters(#{fbo.code}.class, registry, crudOperations(), this);")
-		@ParamNames("registry")
-		@Override
-		public void registerFormatters(FormatterRegistry registry) {
-			//EntityConverterUtil.registerConverters(FormBackingObject.class, registry, crudOperations(), this);		
-		}
-		
-		
-		//TODO
-		@Method(bodyCode="return \"ID: \" + entity.getId();")
-		@Override
-		@ParamNames("entity")
-		public String getLabel(FormBackingObject entity) {
-			return null;
-		}	
+	@Method(
+		imports = { EntityConverterUtil.class },
+		bodyCode = "EntityConverterUtil.registerConverters(#{fbo.code}.class, registry, crudOperations(), this);")
+	@ParamNames("registry")
+	@Override
+	public void registerFormatters(FormatterRegistry registry) {
+		// EntityConverterUtil.registerConverters(FormBackingObject.class,
+		// registry, crudOperations(), this);
+	}
 
-	
+	// TODO
+	@Method(bodyCode = "return \"ID: \" + entity.getId();")
+	@Override
+	@ParamNames("entity")
+	public String getLabel(FormBackingObject entity) {
+		return null;
+	}
+
 }

@@ -9,12 +9,12 @@ import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.FormatterRegistry;
 
 public class Formatters {
-	@Autowired(required=false)
+	@Autowired(required = false)
 	private List<FormatterRegistrar> formatterRegistrars = new ArrayList<FormatterRegistrar>();
-	
-	public void registerConverters(FormatterRegistry registry){
+
+	public void registerConverters(FormatterRegistry registry) {
 		for (FormatterRegistrar provider : formatterRegistrars) {
-			provider.registerFormatters(registry);	
+			provider.registerFormatters(registry);
 		}
 		registry.addConverter(new Converter<Object, String>() {
 

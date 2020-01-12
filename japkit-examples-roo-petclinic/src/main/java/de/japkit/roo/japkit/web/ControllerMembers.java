@@ -31,24 +31,29 @@ import de.japkit.roo.japkit.CommonLibrary.nameFirstLower;
 @Controller
 @RequestMapping("/$path$")
 @RuntimeMetadata
-@Template(libraries=CommonLibrary.class)
+@Template(libraries = CommonLibrary.class)
 public abstract class ControllerMembers {
-	@Function(expr="applicationService")
-	class ApplicationService{}
-	
+	@Function(expr = "applicationService")
+	class ApplicationService {
+	}
+
 	@Resource
 	private ApplicationService applicationService;
-	
-	@Template(src="#{createCommands.get(0)}", srcVar="cmdMethod")
-	abstract class Create{
-		@Var(expr="#{cmdMethod.parameters.get(0).asType()}")
-		class Command{}
-		
-		@Var(fun={Command.class, nameFirstLower.class})
-		class cmdName{}
-		
+
+	@Template(src = "#{createCommands.get(0)}", srcVar = "cmdMethod")
+	abstract class Create {
+		@Var(expr = "#{cmdMethod.parameters.get(0).asType()}")
+		class Command {
+		}
+
+		@Var(fun = { Command.class, nameFirstLower.class })
+		class cmdName {
+		}
+
 		/**
-		 * @japkit.bodyCode <pre>
+		 * @japkit.bodyCode
+		 * 
+		 *                  <pre>
 		 * <code>
 		 * if (bindingResult.hasErrors()) {
 		 * 	populateCreateForm(uiModel, #{cmdName});
@@ -59,83 +64,92 @@ public abstract class ControllerMembers {
 		 * redirectAttributes.addAttribute("id", fbo.getId());
 		 * return "redirect:/#{path}/{id}";
 		 * </code>
-		 * </pre>
+		 *                  </pre>
 		 */
 		@Method(imports = ControllerUtil.class)
 		@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 		public abstract String create(@Valid Command $cmdName$, BindingResult bindingResult, Model uiModel,
 				RedirectAttributes redirectAttributes);
-	
-		
+
 		/**
-		 * @japkit.bodyCode <pre>
+		 * @japkit.bodyCode
+		 * 
+		 *                  <pre>
 		 * <code>
 		 * populateCreateForm(uiModel, new #{command.code}()); 
 		 * return "#{path}/create";
 		 * </code>
-		 * </pre>
+		 *                  </pre>
 		 */
 		@Method()
 		@RequestMapping(params = "form", produces = "text/html")
 		public abstract String createForm(Model uiModel);
-		
+
 		/**
-		 * @japkit.bodyCode <pre>
+		 * @japkit.bodyCode
+		 * 
+		 *                  <pre>
 		 * <code>	
 		 * uiModel.addAttribute("#{cmdName}", command);
 		 * addDateTimeFormatPatterns(uiModel);
 		 * addEnumChoices(uiModel);
 		 * addEntityChoices(uiModel);
 		 * </code>
-		 * </pre>
+		 *                  </pre>
 		 */
 		abstract void populateCreateForm(Model uiModel, Command command);
-	
+
 	}
-	
+
 	/**
-	 * @japkit.bodyCode <pre>
+	 * @japkit.bodyCode
+	 * 
+	 *                  <pre>
 	 * <code>	
 	 * uiModel.addAttribute("updateCommands", UPDATE_COMMANDS);
 	 * </code>
-	 * </pre>
+	 *                  </pre>
 	 */
-	public static void populateUpdateCommands(Model uiModel){};
-	
-	
+	public static void populateUpdateCommands(Model uiModel) {
+	};
+
 	/**
 	 * @japkit.initCode <code>'{'+updateCommands.collect{'"'+it.simpleName+'"'}.join(', ')+'}'</code>
 	 */
-	@Field(initLang="GroovyScript")  //TODO: Modus, der wie bei AVs funktioniert, damit man den Wert auch direkt setzen kann
+	@Field(initLang = "GroovyScript") // TODO: Modus, der wie bei AVs
+										// funktioniert, damit man den Wert auch
+										// direkt setzen kann
 	public static String[] UPDATE_COMMANDS;
-	
-	
-	@Clazz(nameExpr="#{fboName}ResourceBundleNameProvider")
+
+	@Clazz(nameExpr = "#{fboName}ResourceBundleNameProvider")
 	@Template
 	@Component
-	public abstract class ResourceBundleNameProviderForCommands implements ResourceBundleNameProvider{
+	public abstract class ResourceBundleNameProviderForCommands implements ResourceBundleNameProvider {
 		/**
-		 * @japkit.bodyCode <pre>
+		 * @japkit.bodyCode
+		 * 
+		 *                  <pre>
 		 * <code>	
 		 * return new String[]{<%= (updateCommands.toSet() + createCommands.toSet()).collect{'"'+path+'/'+it.simpleName+'"'}.join(', ') %>};
 		 * </code>
-		 * </pre>
+		 *                  </pre>
 		 */
-		@Method(bodyLang=Lang.GSTRING_TEMPLATE)
+		@Method(bodyLang = Lang.GSTRING_TEMPLATE)
 		public abstract String[] getResourceBundleBaseNames();
 	}
-	
-	
-	
-	
-	@Template(src="#{updateCommands}", srcVar="cmdMethod", 
-			vars={@Var(name="command", expr="#{cmdMethod.parameters.get(0).asType()}"),
-			@Var(name="cmdNameU", expr="#{command.simpleName}"),
-			@Var(name="cmdName", expr="#{cmdNameU.toFirstLower}"),
-			@Var(name="cmdMethodName", expr="#{cmdMethod.simpleName.toString()}" )})
-	abstract class Update{
+
+	@Template(
+		src = "#{updateCommands}",
+		srcVar = "cmdMethod",
+		vars = {
+			@Var(name = "command", expr = "#{cmdMethod.parameters.get(0).asType()}"),
+			@Var(name = "cmdNameU", expr = "#{command.simpleName}"), @Var(name = "cmdName", expr = "#{cmdNameU.toFirstLower}"),
+			@Var(name = "cmdMethodName", expr = "#{cmdMethod.simpleName.toString()}") })
+	abstract class Update {
 		/**
-		 * @japkit.bodyCode <pre>
+		 * @japkit.bodyCode
+		 * 
+		 *                  <pre>
 		 * <code>
 		 * if (bindingResult.hasErrors()) {
 		 * 	populate#{cmdNameU}Form(uiModel, #{cmdName});
@@ -146,47 +160,66 @@ public abstract class ControllerMembers {
 		 * redirectAttributes.addAttribute("id", #{cmdName}.getId());
 		 * return "redirect:/#{path}/{id}";
 		 * </code>
-		 * </pre>
+		 *                  </pre>
 		 */
 		@Method(imports = ControllerUtil.class)
 		@RequestMapping(value = "/$cmdMethodName$", method = RequestMethod.POST, produces = "text/html")
 		public abstract String $cmdName$(@Valid Command $cmdName$, BindingResult bindingResult, Model uiModel,
 				RedirectAttributes redirectAttributes);
-	
-		@Function(expr="command")
-		class Command{}
-		
+
+		@Function(expr = "command")
+		class Command {
+		}
+
 		/**
-		 * @japkit.bodyCode <pre>
+		 * @japkit.bodyCode
+		 * 
+		 *                  <pre>
 		 * <code>
 		 * populate#{cmdNameU}Form(uiModel, applicationService.find#{fboName}(id, null)); 
 		 * return "#{path}/#{cmdMethodName}";
 		 * </code>
-		 * </pre>
+		 *                  </pre>
 		 */
 		@Method()
-		@RequestMapping(value = "/{id}/$cmdMethodName$",  produces = "text/html")
+		@RequestMapping(value = "/{id}/$cmdMethodName$", produces = "text/html")
 		public abstract String $cmdName$Form(@PathVariable("id") Long id, Model uiModel);
-		
+
 		/**
-		 * @japkit.bodyCode <pre>
+		 * @japkit.bodyCode
+		 * 
+		 *                  <pre>
 		 * <code>	
 		 * uiModel.addAttribute("#{cmdName}", command);
 		 * addDateTimeFormatPatterns(uiModel);
 		 * addEnumChoices(uiModel);
 		 * addEntityChoices(uiModel);
 		 * </code>
-		 * </pre>
+		 *                  </pre>
 		 */
-		abstract void populate$cmdNameU$Form(Model uiModel, Object command); //TODO: Instead of relying on UI Binding here, the AppService could provide factory methods for commands
-	
+		abstract void populate$cmdNameU$Form(Model uiModel, Object command); // TODO:
+																				// Instead
+																				// of
+																				// relying
+																				// on
+																				// UI
+																				// Binding
+																				// here,
+																				// the
+																				// AppService
+																				// could
+																				// provide
+																				// factory
+																				// methods
+																				// for
+																				// commands
+
 	}
-	
+
 	/**
-	 * @japkit.bodyCode 
-	 * <code>uiModel.addAttribute("#{src.dtfModelAttr}", ControllerUtil.patternForStyle(getDateTimeFormat#{src.name.toFirstUpper}()));</code>
+	 * @japkit.bodyCode <code>uiModel.addAttribute("#{src.dtfModelAttr}", ControllerUtil.patternForStyle(getDateTimeFormat#{src.name.toFirstUpper}()));</code>
 	 */
-	@Method(imports = ControllerUtil.class,	bodyIterator = "datetimeProperties")
+	@Method(imports = ControllerUtil.class, bodyIterator = "datetimeProperties")
 	abstract void addDateTimeFormatPatterns(Model uiModel);
 
 	/**
@@ -195,15 +228,17 @@ public abstract class ControllerMembers {
 	@Method(src = "datetimeProperties")
 	abstract String getDateTimeFormat$name$();
 
-	//TODO: Eigentlich singleValueType.
+	// TODO: Eigentlich singleValueType.
 	/**
 	 * @japkit.bodyCode <code>uiModel.addAttribute("${src.name}s", Arrays.asList(${src.type.name}.values()));</code>
 	 */
-	@Method(imports = Arrays.class, bodyIterator="enumProperties")
+	@Method(imports = Arrays.class, bodyIterator = "enumProperties")
 	abstract void addEnumChoices(Model uiModel);
 
 	/**
-	 * @japkit.bodyCode <pre>
+	 * @japkit.bodyCode
+	 * 
+	 *                  <pre>
 	 * <code>
 	 * uiModel.addAttribute("#{modelAttribute}", crudOperations().find(id));
 	 * uiModel.addAttribute("itemId", id);
@@ -211,15 +246,17 @@ public abstract class ControllerMembers {
 	 * populateUpdateCommands(uiModel);
 	 * return "#{path}/show";
 	 * </code>
-	 * </pre>
+	 *                  </pre>
 	 */
-	
+
 	@Method
 	@RequestMapping(produces = "text/html", value = "/{id}")
 	public abstract String show(@PathVariable("id") Long id, Model uiModel);
 
 	/**
-	 * @japkit.bodyCode <pre>
+	 * @japkit.bodyCode
+	 * 
+	 *                  <pre>
 	 * <code>
 	 * if (page != null || size != null) {
 	 * 	int sizeNo = size == null ? 10 : size.intValue();
@@ -234,16 +271,19 @@ public abstract class ControllerMembers {
 	 * populateUpdateCommands(uiModel);
 	 * return "#{path}/list";
 	 * </code>
-	 * </pre>
+	 *                  </pre>
 	 */
 	@Method()
 	@RequestMapping(produces = "text/html")
-	public abstract String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size",
-			required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(
-			value = "sortOrder", required = false) String sortOrder, Model uiModel);
+	public abstract String list(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size,
+			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
+			@RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel);
 
 	/**
-	 * @japkit.bodyCode <pre>
+	 * @japkit.bodyCode
+	 * 
+	 *                  <pre>
 	 * <code>
 	 * crudOperations().remove(id);
 	 * uiModel.asMap().clear();
@@ -251,23 +291,25 @@ public abstract class ControllerMembers {
 	 * uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
 	 * return "redirect:/#{path}";
 	 * </code>
-	 * </pre>
+	 *                  </pre>
 	 */
 	@Method
 	@RequestMapping(produces = "text/html", method = RequestMethod.DELETE, value = "/{id}")
-	public abstract String delete(@PathVariable("id") Long id, @RequestParam(required = false, value = "page") Integer page, @RequestParam(
-			required = false, value = "size") Integer size, Model uiModel);
+	public abstract String delete(@PathVariable("id") Long id, @RequestParam(required = false, value = "page") Integer page,
+			@RequestParam(required = false, value = "size") Integer size, Model uiModel);
 
 	// TODO: Conditional calls to addDateTimeFormatPatterns?
 	/**
-	 * @japkit.bodyCode <pre>
+	 * @japkit.bodyCode
+	 * 
+	 *                  <pre>
 	 * <code>	
 	 * uiModel.addAttribute("#{modelAttribute}", #{modelAttribute});
 	 * addDateTimeFormatPatterns(uiModel);
 	 * addEnumChoices(uiModel);
 	 * addEntityChoices(uiModel);
 	 * </code>
-	 * </pre>
+	 *                  </pre>
 	 */
 	abstract void populateEditForm(Model uiModel, FormBackingObject $modelAttribute$);
 

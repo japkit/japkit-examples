@@ -27,7 +27,6 @@ import de.japkit.metaannotations.classselectors.GeneratedClass;
 
 /**
  * The builder implementation for the value object #{voInterface.simpleName}.
- *
  */
 @RuntimeMetadata
 @Clazz(nameSuffixToAppend = "Builder")
@@ -36,85 +35,94 @@ public class FreeBuilderTemplate {
 	@Var(fun = SrcType.class)
 	interface VoInterface {
 	};
-	
-	
 
 	@Var(fun = GeneratedClass.class)
 	class Builder {
 	};
 
 	/**
-	 * #{src.asType().toString()} 
-	 * #{src.singleValueType.toString()} 
-	 * #{src.asType().kind} 
-	 * #{src.singleValueType.asElement().getClass()} 
-	 * #{src.singleValueType.asElement().annotationMirrors.toString()} 
+	 * #{src.asType().toString()} #{src.singleValueType.toString()}
+	 * #{src.asType().kind} #{src.singleValueType.asElement().getClass()}
+	 * #{src.singleValueType.asElement().annotationMirrors.toString()}
 	 */
-	@Field(src = "#{properties}", 
-			srcVar = "p",
-			getter = @Getter(commentExpr = "the value that will be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."),
-			setter = @Setter(chain = true,
-					commentExpr = "the value to be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."))
+	@Field(
+		src = "#{properties}",
+		srcVar = "p",
+		getter = @Getter(commentExpr = "the value that will be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."),
+		setter = @Setter(chain = true, commentExpr = "the value to be returned by {@link #{voInterface.simpleName}##{p.getter.name}()}."))
 	private SrcType $name$;
-	
-	@Matcher(typeCategory=TypeCategory.PRIMITIVE)
-	class PrimitiveMatcher{}
-	
+
+	@Matcher(typeCategory = TypeCategory.PRIMITIVE)
+	class PrimitiveMatcher {
+	}
+
 	@Method(src = "#{properties}", srcFilterFun = PrimitiveMatcher.class)
-	void primitiveMatcher$name$(){};
-	
-	@Matcher(singleValueTypeCategory=TypeCategory.PRIMITIVE)
-	class SingleValuePrimitiveMatcher{}
-	
+	void primitiveMatcher$name$() {
+	};
+
+	@Matcher(singleValueTypeCategory = TypeCategory.PRIMITIVE)
+	class SingleValuePrimitiveMatcher {
+	}
+
 	@Method(src = "#{properties}", srcFilterFun = SingleValuePrimitiveMatcher.class)
-	void singleValuePrimitiveMatcher$name$(){};
-	
-	@Matcher(singleValueTypeCategoryNot=TypeCategory.PRIMITIVE)
-	class SingleValueNotPrimitiveMatcher{}
-	
+	void singleValuePrimitiveMatcher$name$() {
+	};
+
+	@Matcher(singleValueTypeCategoryNot = TypeCategory.PRIMITIVE)
+	class SingleValueNotPrimitiveMatcher {
+	}
+
 	@Method(src = "#{properties}", srcFilterFun = SingleValueNotPrimitiveMatcher.class)
-	void singleValueNotPrimitiveMatcher$name$(){};
-	
-	@Matcher(typeCategory=TypeCategory.ARRAY)
-	class ArrayMatcher{}
+	void singleValueNotPrimitiveMatcher$name$() {
+	};
+
+	@Matcher(typeCategory = TypeCategory.ARRAY)
+	class ArrayMatcher {
+	}
 
 	@Method(src = "#{properties}", srcFilterFun = ArrayMatcher.class)
-	void arrayMatcher$name$(){};
-	
-	@Matcher(typeCategory=TypeCategory.COLLECTION)
-	class CollectionMatcher{}
-	
+	void arrayMatcher$name$() {
+	};
+
+	@Matcher(typeCategory = TypeCategory.COLLECTION)
+	class CollectionMatcher {
+	}
+
 	@Method(src = "#{properties}", srcFilterFun = CollectionMatcher.class)
-	void collectionMatcher$name$(){};
-	
-	@Matcher(typeCategoryNot=TypeCategory.COLLECTION)
-	class NotCollectionMatcher{}
-	
+	void collectionMatcher$name$() {
+	};
+
+	@Matcher(typeCategoryNot = TypeCategory.COLLECTION)
+	class NotCollectionMatcher {
+	}
+
 	@Method(src = "#{properties}", srcFilterFun = NotCollectionMatcher.class)
-	void notCollectionMatcher$name$(){};
-	
-	@Matcher(typeCategory=TypeCategory.MAP)
-	class MapMatcher{}
-	
+	void notCollectionMatcher$name$() {
+	};
+
+	@Matcher(typeCategory = TypeCategory.MAP)
+	class MapMatcher {
+	}
+
 	@Method(src = "#{properties}", srcFilterFun = MapMatcher.class)
-	void mapMatcher$name$(){};
-	
-	@Matcher(singleValueTypeAnnotations=FooBarAnnotation.class)
-	class SingleValueHasFooBarAnnotationMatcher{}
-	
+	void mapMatcher$name$() {
+	};
+
+	@Matcher(singleValueTypeAnnotations = FooBarAnnotation.class)
+	class SingleValueHasFooBarAnnotationMatcher {
+	}
+
 	@Method(src = "#{properties}", srcFilterFun = SingleValueHasFooBarAnnotationMatcher.class)
-	void singleValueHasFooBarAnnotationMatcher$name$(){};
-	
+	void singleValueHasFooBarAnnotationMatcher$name$() {
+	};
+
 	/**
-	 *  The implementation of the value object #{voInterface.simpleName}.
-	 *
+	 * The implementation of the value object #{voInterface.simpleName}.
 	 */
 	@InnerClass
 	@FooBarAnnotation
 	static final class Value implements VoInterface {
-		@Field(src = "#{properties}",
-				srcVar = "p",
-				getter = @Getter())
+		@Field(src = "#{properties}", srcVar = "p", getter = @Getter())
 		private final SrcType $name$ = null;
 
 		@Matcher(type = Date.class)
@@ -132,27 +140,27 @@ public class FreeBuilderTemplate {
 		@Switch
 		static class defensiveCopyFragment {
 			@isDate
-			@CodeFragment(imports = Date.class,
-					code = "new Date(#{surrounded}.getTime())")
+			@CodeFragment(imports = Date.class, code = "new Date(#{surrounded}.getTime())")
 			String copyDate;
 
 			@isList
-			@CodeFragment(imports = { ArrayList.class, Collections.class },
-					code = "Collections.unmodifiableList(new ArrayList<>(#{surrounded}))")
+			@CodeFragment(
+				imports = { ArrayList.class, Collections.class },
+				code = "Collections.unmodifiableList(new ArrayList<>(#{surrounded}))")
 			String copyList;
 
 			@isSet
-			@CodeFragment(imports = { HashSet.class, Collections.class },
-					code = "Collections.unmodifiableSet(new HashSet<>(#{surrounded}))")
+			@CodeFragment(
+				imports = { HashSet.class, Collections.class },
+				code = "Collections.unmodifiableSet(new HashSet<>(#{surrounded}))")
 			String copySet;
-			
+
 			@DefaultCase
-			@CodeFragment(code="#{surrounded}")
+			@CodeFragment(code = "#{surrounded}")
 			String dflt;
 		}
 
-		@CodeFragment(code = "builder.#{name}",
-				surroundingFragments = "defensiveCopyFragment")
+		@CodeFragment(code = "builder.#{name}", surroundingFragments = "defensiveCopyFragment")
 		static class rhs {
 		}
 
@@ -160,8 +168,7 @@ public class FreeBuilderTemplate {
 		static class assignment {
 		}
 
-		@Constructor(bodyIterator = "#{properties}",
-				bodyCode = "#{assignment()}")
+		@Constructor(bodyIterator = "#{properties}", bodyCode = "#{assignment()}")
 		private Value(Builder builder) {
 
 		}
@@ -177,27 +184,25 @@ public class FreeBuilderTemplate {
 		 * Value other = (Value) obj;
 		 * return
 		 * </pre>
-		 *  
+		 * 
 		 * <li>japkit.bodyCode Objects.equals(#{name}, other.#{name})
 		 * <li>japkit.bodyAfterIteratorCode ;
 		 * </ul>
 		 */
-		@Method(imports = Objects.class,
-				bodyIterator = "#{properties}",
-				bodySeparator = " && ",
-				bodyIndentAfterLinebreak = true)
+		@Method(imports = Objects.class, bodyIterator = "#{properties}", bodySeparator = " && ", bodyIndentAfterLinebreak = true)
 		@Override
 		public boolean equals(Object obj) {
 			return true;
 		}
 
-		@Method(imports = Objects.class,
-				bodyBeforeIteratorCode = "return Objects.hash(",
-				bodyIterator = "#{properties}",
-				bodyCode = "#{name}",
-				bodySeparator = ", ",
-				bodyLinebreak = false,
-				bodyAfterIteratorCode = ");")
+		@Method(
+			imports = Objects.class,
+			bodyBeforeIteratorCode = "return Objects.hash(",
+			bodyIterator = "#{properties}",
+			bodyCode = "#{name}",
+			bodySeparator = ", ",
+			bodyLinebreak = false,
+			bodyAfterIteratorCode = ");")
 		@Override
 		public int hashCode() {
 			return 0;
@@ -209,8 +214,7 @@ public class FreeBuilderTemplate {
 		 * @japkit.bodySeparator ", " +
 		 * @japkit.bodyAfterIteratorCode "}";
 		 */
-		@Method(bodyIterator = "#{properties}",
-				bodyIndentAfterLinebreak = true)
+		@Method(bodyIterator = "#{properties}", bodyIndentAfterLinebreak = true)
 		@Override
 		public String toString() {
 			return "";

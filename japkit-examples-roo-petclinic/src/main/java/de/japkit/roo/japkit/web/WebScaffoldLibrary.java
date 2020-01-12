@@ -11,35 +11,45 @@ import de.japkit.metaannotations.TypeQuery;
 import de.japkit.roo.japkit.application.DTO;
 
 @RuntimeMetadata
-@Library(annotationImports={TableColumn.class, JapkitWebScaffold.class})
+@Library(annotationImports = { TableColumn.class, JapkitWebScaffold.class })
 public class WebScaffoldLibrary {
-	
-	@Function(expr="#{src.toString().replace('.','_').toLowerCase()}")
-	class toHtmlId{}
-	
+
+	@Function(expr = "#{src.toString().replace('.','_').toLowerCase()}")
+	class toHtmlId {
+	}
+
 	@Function(expr = "#{fboShortId}_#{src.name.toLowerCase()}_date_format")
-	class dtfModelAttr{}
-	
+	class dtfModelAttr {
+	}
+
 	@Matcher(singleValueTypeAnnotations = DTO.class)
-	class isDTO{}
-	
-	@Matcher(annotations=TableColumn.class)
-	class isTableColumn{}
-	
+	class isDTO {
+	}
+
+	@Matcher(annotations = TableColumn.class)
+	class isTableColumn {
+	}
+
 	@TypeQuery(annotation = ViewModel.class, shadow = true, unique = true, filterAV = "formBackingObject")
-	class findViewModel{}
-	
+	class findViewModel {
+	}
+
 	@TypeQuery(annotation = JapkitWebScaffold.class, shadow = true)
-	class findAllControllers{} 
-	
-	@Function(expr="#{properties}", filterFun=isViewableProperty.class)
-	class viewableProperties{}
-	
+	class findAllControllers {
+	}
+
+	@Function(expr = "#{properties}", filterFun = isViewableProperty.class)
+	class viewableProperties {
+	}
+
 	@Matcher(annotationsNot = { Id.class, Version.class })
-	class isViewableProperty{};
-	
+	class isViewableProperty {
+	};
+
 	/**
-	 * @japkit.expr <pre>
+	 * @japkit.expr
+	 * 
+	 *              <pre>
 	 * <code>
 	 * def pNames;  
 	 * pNames={p, prfx -> 
@@ -52,8 +62,9 @@ public class WebScaffoldLibrary {
 	 * };
 	 * pNames(src, null)
 	 * </code>
-	 * </pre>
+	 *              </pre>
 	 */
 	@Function(lang = "GroovyScript")
-	class allPropertyNames {}
+	class allPropertyNames {
+	}
 }

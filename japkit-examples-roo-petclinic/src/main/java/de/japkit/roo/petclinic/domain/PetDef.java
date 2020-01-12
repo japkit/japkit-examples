@@ -13,37 +13,35 @@ import de.japkit.roo.japkit.domain.JapkitEntity;
 public class PetDef {
 
 	/**
-     */
+	 */
 	@NotNull
 	@Size(min = 1)
 	@Order(0)
 	String name;
 
 	/**
-     */
+	 */
 	@NotNull
 	@Enumerated
 	@Order(1)
 	PetType type;
-	
+
 	/**
-     */
+	 */
 	@NotNull
 	@Min(0L)
 	@Order(2)
 	Float weight;
 
 	/**
-     */
+	 */
 	@Order(3)
 	boolean sendReminders;
-	
+
 	/**
-     */
+	 */
 	@ManyToOne
 	@Order(4)
 	Owner owner;
 
-	
-	
 }

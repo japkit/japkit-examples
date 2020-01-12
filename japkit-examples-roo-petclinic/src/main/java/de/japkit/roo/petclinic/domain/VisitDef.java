@@ -18,29 +18,29 @@ import de.japkit.roo.japkit.domain.JapkitEntity;
 public class VisitDef {
 
 	/**
-     */
+	 */
 	@NotNull
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "M-")
 	@Order(0)
 	Date visitDate;
-	
+
 	/**
-     */
+	 */
 	@Size(max = 255)
 	@Order(1)
 	String description;
 
 	/**
-     */
+	 */
 	@NotNull
 	@ManyToOne
 	@Order(2)
 	Pet pet;
 
 	/**
-     */
+	 */
 	@ManyToOne
 	@Order(3)
 	Vet vet;

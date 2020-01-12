@@ -20,46 +20,46 @@ import de.japkit.roo.japkit.domain.JapkitEntity;
 public abstract class AbstractPersonDef {
 
 	/**
-     */
+	 */
 	@Order(0)
 	@Size(min = 3, max = 30)
 	String firstName;
 
 	/**
-     */
+	 */
 	@Order(1)
 	@NotNull
 	@Size(min = 3, max = 30)
 	String lastName;
 
 	/**
-     */
+	 */
 	@Order(2)
 	@NotNull
 	@Valid
-	//@Size(min = 1, max = 50)
+	// @Size(min = 1, max = 50)
 	Address address;
 
 	/**
-     */
+	 */
 	@Order(4)
 	@NotNull
 	String telephone;
 
 	/**
-     */
+	 */
 	@Order(5)
 	@Size(max = 30)
 	String homePage;
 
 	/**
-     */
+	 */
 	@Order(6)
 	@Size(min = 6, max = 30)
 	String email;
 
 	/**
-     */
+	 */
 	@Order(7)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)

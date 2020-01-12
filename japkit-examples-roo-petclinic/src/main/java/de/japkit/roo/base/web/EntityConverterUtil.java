@@ -7,7 +7,6 @@ import org.springframework.format.FormatterRegistry;
  * TODO: Composite keys?
  * 
  * @author stefan
- * 
  * @param <E>
  */
 public class EntityConverterUtil {

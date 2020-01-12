@@ -8,5 +8,5 @@ public class Layers {
 	public static final int VIEW_MODELS = 4;
 	public static final int CONTROLLERS = 5;
 	public static final int WEB_APP = 6;
-	
+
 }

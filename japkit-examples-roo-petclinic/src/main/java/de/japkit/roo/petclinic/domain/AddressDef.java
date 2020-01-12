@@ -13,29 +13,28 @@ public class AddressDef {
 	@NotNull
 	@Order(0)
 	String street;
-	
+
 	/**
 	 * the city
 	 */
 	@Order(1)
 	@NotNull
 	String city;
-	
+
 	/**
 	 * the zip code
 	 */
 	@Order(2)
 	@NotNull
 	String zip;
-	
+
 	/**
 	 * the state
 	 */
 	@Order(3)
 	String state;
-	
-	//@Order(4)
-	//Date someDate;
-	
-	
+
+	// @Order(4)
+	// Date someDate;
+
 }

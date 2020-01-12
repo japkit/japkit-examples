@@ -9,8 +9,7 @@ public class OwnerViewModelDef {
 	@TableColumn
 	String firstName;
 
-
 	@TableColumn
 	String lastName;
-	
+
 }

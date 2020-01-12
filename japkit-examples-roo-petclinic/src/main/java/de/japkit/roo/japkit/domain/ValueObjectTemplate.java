@@ -32,37 +32,46 @@ import de.japkit.metaannotations.classselectors.ClassSelectorKind;
 import de.japkit.metaannotations.classselectors.GeneratedClass;
 
 @RuntimeMetadata
-@Template(vars=@Var(name="properties", expr="#{src.declaredFields}"))
+@Template(vars = @Var(name = "properties", expr = "#{src.declaredFields}"))
 @Embeddable
 public abstract class ValueObjectTemplate {
 	@Matcher(annotations = NotNull.class)
-	class mandatory{};
-	
+	class mandatory {
+	};
+
 	/**
-	 * @japkit.code <pre>
+	 * @japkit.code
+	 * 
+	 *              <pre>
 	 * <code>
 	 * if(#{param}==null){
 	 * 	throw new IllegalArgumentException("#{param} must not be null!");
 	 * }
 	 * </code>
-	 * </pre>
+	 *              </pre>
 	 */
 	@CodeFragment(condFun = mandatory.class)
-	static class validationFragment{}
-	
-	@CodeFragment(imports = Date.class,
-			cases = { @Case(cond = "isDate", value = "new Date(#{surrounded}.getTime())") })
+	static class validationFragment {
+	}
+
+	@CodeFragment(imports = Date.class, cases = { @Case(cond = "isDate", value = "new Date(#{surrounded}.getTime())") })
 	static class defensiveCopyFragment {
 	}
 
-	@Function(expr="#{src.declaredFields}")
-	class props{}
-	
+	@Function(expr = "#{src.declaredFields}")
+	class props {
+	}
+
 	@Order(1)
-	@InnerClass(fields = @Field(srcFun = {props.class}, modifiers = Modifier.PRIVATE,
-			annotations = @Annotation(copyAnnotationsFromPackages = { JPA, JSR303, SPRING_FORMAT }), 
-				getter = @Getter(/*fluent = true*/), setter = @Setter(/*fluent = true,*/
-					chain = true), commentFromSrc = true))
+	@InnerClass(
+		fields = @Field(
+			srcFun = { props.class },
+			modifiers = Modifier.PRIVATE,
+			annotations = @Annotation(copyAnnotationsFromPackages = { JPA, JSR303, SPRING_FORMAT }),
+			getter = @Getter(/* fluent = true */),
+			setter = @Setter(/* fluent = true, */
+				chain = true),
+			commentFromSrc = true))
 	@ClassSelector(kind = ClassSelectorKind.INNER_CLASS_NAME, enclosing = GeneratedClass.class)
 	public static abstract class Builder {
 
@@ -75,26 +84,33 @@ public abstract class ValueObjectTemplate {
 	}
 
 	@Order(2)
-	@Field(src = "#{properties}", annotations = @Annotation(copyAnnotationsFromPackages = { JPA, JSR303, SPRING_FORMAT }), 
-		commentFromSrc = true, getter = @Getter(
-			/*fluent = true,*/ surroundReturnExprFragments = "defensiveCopyFragment"))
+	@Field(
+		src = "#{properties}",
+		annotations = @Annotation(copyAnnotationsFromPackages = { JPA, JSR303, SPRING_FORMAT }),
+		commentFromSrc = true,
+		getter = @Getter(/* fluent = true, */ surroundReturnExprFragments = "defensiveCopyFragment"))
 	private SrcType $srcElementName$;
 
 	@Order(3)
 	@Constructor(bodyCode = "//Some ctor code")
 	private ValueObjectTemplate() {
 	};
-	
+
 	@CodeFragment(code = "#{src}", surroundingFragments = "defensiveCopyFragment")
-	static class rhs{}
-	
+	static class rhs {
+	}
+
 	@CodeFragment(code = "/**after*/")
-	static class after{};
-	
-	@CodeFragment(vars = @Var(name="param", expr ="builder.#{src.simpleName}"),
-			code = "this.#{src.simpleName} = #{rhs(param)};",	beforeFragments = "validationFragment")
-	static class assignment{}
-	
+	static class after {
+	};
+
+	@CodeFragment(
+		vars = @Var(name = "param", expr = "builder.#{src.simpleName}"),
+		code = "this.#{src.simpleName} = #{rhs(param)};",
+		beforeFragments = "validationFragment")
+	static class assignment {
+	}
+
 	@Order(4)
 	@Constructor(bodyIterator = "properties", bodyCode = "#{assignment()}")
 	@ParamNames("builder")
