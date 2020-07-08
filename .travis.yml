@@ -9,16 +9,20 @@ jdk:
   - openjdk14
 env:
   - PROFILES=javac
-  - PROFILES=jdt
+  - PROFILES=jdt,jdt321
+  - PROFILES=jdt,jdt322
   - PROFILES=javac,java11
-  - PROFILES=jdt,java11
+  - PROFILES=jdt,jdt321,java11
+  - PROFILES=jdt,jdt322,java11
 
 matrix:
   exclude:
-
     - jdk: openjdk8
       env: PROFILES=javac,java11
     - jdk: openjdk8
-      env: PROFILES=jdt,java11
+      env: PROFILES=jdt,jdt321,java11
+    - jdk: openjdk8
+      env: PROFILES=jdt,jdt322,java11
+
 install: "mvn help:active-profiles help:effective-pom help:effective-settings -q -P ${PROFILES},-standard-with-extra-repos"
 script: "mvn clean install -U  -P ${PROFILES},-standard-with-extra-repos -Dmaven.javadoc.skip=true"
