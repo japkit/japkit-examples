@@ -237,7 +237,8 @@
 				<maven.compiler.release>11</maven.compiler.release>
 			</properties>
 		</profile>
-		<profile>
+		<!-- Not yet working. Requires at least Spring Boot 2.2.6 -->
+		<!--  profile>
 			<id>java14</id>
 			<activation></activation>
 			<properties>
@@ -245,7 +246,7 @@
 				<maven.compiler.target>14</maven.compiler.target>
 				<maven.compiler.release>14</maven.compiler.release>
 			</properties>
-		</profile>
+		</profile -->
 		<profile>
 			<id>release-sign-artifacts</id>
 			<activation>
