@@ -28,4 +28,5 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      # temporarily only for target 11. for target 16, Spring Boot App Tests will fail. Furthermore, jdt version does not support 16 and 17.
       run: mvn -B package -P ${{ matrix.profiles }} -Dmaven.compiler.release=11 --file pom.xml
