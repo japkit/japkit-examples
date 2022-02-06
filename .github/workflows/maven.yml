@@ -17,7 +17,9 @@ jobs:
       fail-fast: false
       matrix:
         java-version: [11,16,17]
-        profiles: ['javac', 'jdt,jdt321', 'jdt,jdt322']
+        profiles: ['javac', 'jdt']
+        # Eclispe Compiler version for profile jdt
+        ecj-version: ['3.28']
 
     steps:
     - uses: actions/checkout@v2
@@ -29,4 +31,4 @@ jobs:
         cache: maven
     - name: Build with Maven
       # temporarily only for target 11. for target 16, Spring Boot App Tests will fail. Furthermore, jdt version does not support 16 and 17.
-      run: mvn -B package -P ${{ matrix.profiles }} -Dmaven.compiler.release=11 --file pom.xml
+      run: mvn -B package -P ${{ matrix.profiles }} -Dmaven.compiler.release=${{ matrix.java-version }} -Decj.version=${{ matrix.ecj-version }} --file pom.xml
