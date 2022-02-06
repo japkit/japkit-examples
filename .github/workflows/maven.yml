@@ -19,7 +19,7 @@ jobs:
         java-version: [11,16,17]
         profiles: ['javac', 'jdt']
         # Eclispe Compiler version for profile jdt
-        ecj-version: ['3.28']
+        ecj-version: ['3.28.0']
 
     steps:
     - uses: actions/checkout@v2
