@@ -1,5 +1,5 @@
 # japkit-examples
 
-[![Build Status](https://travis-ci.org/japkit/japkit-examples.svg?branch=master)](https://travis-ci.org/japkit/japkit-examples)
+[![Java CI with Maven](https://github.com/japkit/japkit-examples/actions/workflows/maven.yml/badge.svg)](https://github.com/japkit/japkit-examples/actions/workflows/maven.yml)
 
 Examples for japkit.
