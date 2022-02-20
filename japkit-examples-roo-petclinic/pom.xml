@@ -18,7 +18,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<maven.compiler.release>11</maven.compiler.release>
-		<japkit.version>1.26-SNAPSHOT</japkit.version>
+		<japkit.version>1.27-SNAPSHOT</japkit.version>
 		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
 		<ecj.version>3.21.0</ecj.version>
 		<!-- EL3 and Groovy -->
