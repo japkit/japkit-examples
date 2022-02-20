@@ -15,10 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # Build with different Java Versions and besides javac also with Eclipse Java Compiler (ecj / jdt). 
       matrix:
         java-version: [11,16,17]
         profiles: ['javac', 'jdt']
-        # Eclispe Compiler version for profile jdt
+        # Eclispe Compiler version for profile jdt. Must support all given Java versions.
         ecj-version: ['3.28.0']
 
     steps:
@@ -30,5 +31,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      # temporarily only for target 11. for target 16, Spring Boot App Tests will fail. Furthermore, jdt version does not support 16 and 17.
       run: mvn -B package -P ${{ matrix.profiles }} -Dmaven.compiler.release=${{ matrix.java-version }} -Decj.version=${{ matrix.ecj-version }} --file pom.xml
