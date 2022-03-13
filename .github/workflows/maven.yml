@@ -32,3 +32,5 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package -P ${{ matrix.profiles }} -Dmaven.compiler.release=${{ matrix.java-version }} -Decj.version=${{ matrix.ecj-version }} --file pom.xml
+      env:
+        MAVEN_OPTS: "--illegal-access=deny"
