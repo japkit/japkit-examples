@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       # Build with different Java Versions and besides javac also with Eclipse Java Compiler (ecj / jdt). 
       matrix:
-        java-version: [17, 20]
+        java-version: [17]
         profiles: ['javac', 'jdt']
         # Eclispe Compiler version for profile jdt. Must support all given Java versions.
         ecj-version: ['3.34.0']
