@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.validation.constraints.NotNull;
-
 import de.japkit.examples.freebuilder.FreeBuilder;
+import jakarta.validation.constraints.NotNull;
 
 @FreeBuilder
 public interface Person {
